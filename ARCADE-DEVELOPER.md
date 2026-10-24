@@ -2,7 +2,7 @@
 
 **Release rule superseding all automatic deployment language below:** Read workspace AGENTS.md and RELEASE-PENDING.md first. Develop/test locally and mark accumulated work pending. Only a direct human publish/upload instruction or a new-version release announcement authorizes uploading all pending application work. A heartbeat or an agent-generated version does not authorize publishing, live migrations, pushes or activation. Scheduled winners remain local and pending; keep the existing side game active until the user releases them.
 
-This release: **v2.1 — NIKO NOOOO DONT DO IT**. The internal database protocol is 6; never present that as the user's patch version. Historical names supplied by the user are **v1.0 major start** and **v1.5 tweakmax**. Every future update needs a signature patch name and a version increment. Maintain `work/v6/patches.json`, the embedded patch banner and the patch history together.
+This release: **v2.2 — time to chat out the nicotine**. The internal database protocol is 6; never present that as the user's patch version. Historical names supplied by the user are **v1.0 major start** and **v1.5 tweakmax**. Every future update needs a signature patch name and a version increment. Maintain `work/v6/patches.json`, the embedded patch banner and the patch history together.
 
 ## Permanent main versus rotating side game
 
@@ -12,7 +12,7 @@ The user wants BLACKSITE to grow into a complex game. It must be genuinely hard 
 
 ## Sources and checks
 
-Crew Chat and drawing challenges ship in v2.1. Read `CREW-CHAT.md`. The `chat.sql` migration is required before the new client; its public RPCs enforce private admission, bounded retention and consent. `chat.js`, `drawing.js` and `chat-style.css` are integrated by the v6 build. Preserve the BLACKSITE improvements, the current side cabinet and existing player data in subsequent work.
+Crew Chat shipped in v2.1; Common Room and full-quality Drawing Studio ship in v2.2. Read `CREW-CHAT.md`. The `chat.sql` (v2.1) and `v22.sql` (v2.2) migrations are required before their respective clients; its public RPCs enforce private admission, bounded retention and consent. `chat.js`, `drawing.js` and `chat-style.css` are integrated by the v6 build. Preserve the BLACKSITE improvements, the current side cabinet and existing player data in subsequent work.
 
 
 BLACKSITE v2.1 source additions: `shop-visuals.js` supplies item infographics, and `visual-effects.js` supplies pooled attack effects and individually named boss HP badges. `compose-renderer.mjs` includes both renderer fragments; `build.mjs` includes the shop guide. Use `build.mjs --pending` and `package.mjs --pending` for an explicitly unpublished, self-contained `outputs/blacksite-pending-preview.html` without replacing release aliases/manifests. Never ship the pending-label build; rebuild normally only after a human release instruction. Run `pending-engine-tests.mjs` and `pending-browser-tests.mjs` alongside the existing relevant suites. See RELEASE-PENDING.md for the cumulative release queue.
@@ -51,3 +51,11 @@ Live URL: https://tuurevvv.github.io/KME-enterprise/ . Repository: `TuureVvv/KME
 The current SQL upgrade is `outputs/killme-enterprise-shelter-shift.sql`; it depends on earlier v3/v4/v5 migrations. Its private helper backups preserve live definitions. It does not change the active side game or cast votes. Owner activation of the starting `smoke-break` side cabinet happens only after new public code is verified. All new records are private, admission-gated and cascade with character deletion. Keep the Netflix-style picker and explicit remember choice; never fall back silently to the first character. Any admitted friend can delete a character by typed-name confirmation, by user design.
 
 Only free private-friends scope is authorized: no purchases, tradable rewards, gambling, cash prizes or real-world claims. Preserve optional nicotine sharing and games-only mode. Use server guards and explicit grants, not merely the authenticated role, for authorization. Don't claim a deployment or legal guarantee without evidence. Record verified release details in `outputs/`.
+
+## v2.2 Common Room and Studio
+
+Sources: `community-core.js`, `art-api.js`, `studio.js`, `community.js`, `community.css`, `home.html`, `v22.sql`. `drawing.js` is now only the quick-dialog bridge; `studio.js` owns the raster editor. Preserve unlimited drawing actions, lossless originals and IndexedDB legacy-draft migration. Do not reintroduce the 24 KiB/800-stroke/600-point limits or reduce detailed art to a fixed palette. Use small previews and prune older stored originals instead. The 24 MiB transfer envelope is above the worst-case lossless output of the fixed 2048 × 1536 canvas; it is not a stroke-complexity gate.
+
+Drawing Studio is a permanent unscored cabinet under `drawing-studio`; it does not call competitive run APIs or invent boss damage. Keep BLACKSITE permanent and the existing rotating ballot/cabinet unchanged. The homepage shows recent chat and lazy small art previews with a composer; full-resolution originals load only on explicit request. Shared daily writing uses revision compare-and-swap, a client three-way merge and explicit overlap conflicts. Reset uses the server’s Europe/Helsinki calendar day. Preserve unsaved drafts instead of blindly overwriting.
+
+Checks: `community-core-tests.mjs`, `v22-db-tests.mjs`, `v22-browser-tests.mjs`, `v22-recovery-tests.mjs`, plus relevant game regressions. Test only isolated demo data or a local database; never create fake live drawings, messages, scores, votes or health reports.

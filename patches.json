@@ -1,7 +1,7 @@
 {
   "current": {
-    "version": "2.1",
-    "name": "NIKO NOOOO DONT DO IT"
+    "version": "2.2",
+    "name": "time to chat out the nicotine"
   },
   "history": [
     {
@@ -21,6 +21,11 @@
       "version": "2.1",
       "name": "NIKO NOOOO DONT DO IT",
       "notes": "BLACKSITE shield-charge fix, illustrated shop, animated boss tells and named HP bars. Crew Chat removes the daily posting limit. Drawing side quests, private outcome handling and bounded image/history retention."
+    },
+    {
+      "version": "2.2",
+      "name": "time to chat out the nicotine",
+      "notes": "A social Overview with shared daily writing, recent Crew Chat and visible drawings. Drawing Studio becomes the default quick distraction and a permanent Arcade mode. Full-quality originals, no drawing action caps, layers, zoom, fine tools and thousands of prompts."
     }
   ]
 }

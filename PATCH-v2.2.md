@@ -1,0 +1,14 @@
+# v2.2 — time to chat out the nicotine
+
+- **A new Common Room.** Overview now centres on the crew: recent chat with a composer, visible drawings, a shared daily page, a compact personal streak and check-ins, and clearer recent updates. Clock-in/change-shift and character controls are prominent. The fact card and questionable-workforce panel have left Overview.
+- **Everybody has the pen.** Type directly into one shared daily textbox. It autosaves without a Send button and resets at midnight in Helsinki. Compatible edits merge; overlapping edits preserve your local draft and show a conflict instead of silently replacing someone else’s writing. Drafts survive disconnection.
+- **Drawing comes first.** I'm tweaking opens Drawing Studio by default. Tweakmax remains selectable. Drawing Studio also has its own permanent Arcade cabinet and game-library entry; BLACKSITE and the voted rotating game stay intact.
+- **A proper canvas.** 2,048 × 1,536 pixels, three layers, custom colours, brush and fine pencil, opacity, eraser, fill, line/rectangle/ellipse tools, eyedropper, mirror drawing, zoom/pan, undo/redo, expanded studio mode and lossless PNG download. Mouse, touch, pen and keyboard are supported.
+- **263 subjects; 15,780 combinations.** Roll a new idea or edit the prompt yourself. The subjects range from animals and odd characters to scenes, objects and imagined worlds.
+- **No more simplifying good drawings.** The old 800-stroke/600-point limits and 24 KiB original-image gate are gone. Raster drawing has no action or time cap. Complete originals upload in resumable, hash-verified pieces; separate small previews keep chat fast. Save a PNG locally any time, including after an upload failure. Older gallery files expire to control storage rather than rejecting detail in new art.
+- **Saved masterpieces survive.** Existing local vector drafts migrate without the previous stroke truncation. New full-resolution drafts and pending upload receipts use IndexedDB. Retrying a lost response keeps the original image and answer, without duplicate posts or resistance reports.
+- **See the art in Overview.** Recent drawings appear as lightweight previews in the home chat. Open the full original, switch to actual pixels and save the PNG. Posting updates the conversation without a manual page refresh.
+
+The daily text page and art remain private to admitted friends. Only explicit, consented resistance creates a check-in; Not this time creates no use report. Original gallery retention, bounded downloads and old-file cleanup protect free-tier resources. Nothing can guarantee unlimited provider storage or bandwidth, but the app never asks you to undo drawing strokes to fit a tiny upload limit.
+
+Character data, existing v2.1 drawings, game records, cosmetics, boss contribution limits and the current rotating ballot are preserved.
