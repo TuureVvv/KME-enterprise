@@ -1,6 +1,8 @@
 # KME arcade and BLACKSITE developer handoff
 
-Current public patch: **v2.0 — MAJOR ANTI TWEAK SYSTEM OFFLINE**. The internal database protocol is 6; never present that as the user's patch version. Historical names supplied by the user are **v1.0 major start** and **v1.5 tweakmax**. Every future update needs a signature patch name and a version increment. Maintain `work/v6/patches.json`, the embedded patch banner and the patch history together.
+**Release rule superseding all automatic deployment language below:** Read workspace AGENTS.md and RELEASE-PENDING.md first. Develop/test locally and mark accumulated work pending. Only a direct human publish/upload instruction or a new-version release announcement authorizes uploading all pending application work. A heartbeat or an agent-generated version does not authorize publishing, live migrations, pushes or activation. Scheduled winners remain local and pending; keep the existing side game active until the user releases them.
+
+This release: **v2.1 — NIKO NOOOO DONT DO IT**. The internal database protocol is 6; never present that as the user's patch version. Historical names supplied by the user are **v1.0 major start** and **v1.5 tweakmax**. Every future update needs a signature patch name and a version increment. Maintain `work/v6/patches.json`, the embedded patch banner and the patch history together.
 
 ## Permanent main versus rotating side game
 
@@ -9,6 +11,12 @@ Current public patch: **v2.0 — MAJOR ANTI TWEAK SYSTEM OFFLINE**. The internal
 The user wants BLACKSITE to grow into a complex game. It must be genuinely hard when played greedily: distinct attacks, timing, resource decisions and serious loss, with powerful feature combinations available to discover. Endless pressure should eventually overwhelm ordinary builds. Avoid shallow speed-only scaling. The rotating cabinet can be a lower-investment, shorter game; keep it polished and mechanically distinct.
 
 ## Sources and checks
+
+Crew Chat and drawing challenges ship in v2.1. Read `CREW-CHAT.md`. The `chat.sql` migration is required before the new client; its public RPCs enforce private admission, bounded retention and consent. `chat.js`, `drawing.js` and `chat-style.css` are integrated by the v6 build. Preserve the BLACKSITE improvements, the current side cabinet and existing player data in subsequent work.
+
+
+BLACKSITE v2.1 source additions: `shop-visuals.js` supplies item infographics, and `visual-effects.js` supplies pooled attack effects and individually named boss HP badges. `compose-renderer.mjs` includes both renderer fragments; `build.mjs` includes the shop guide. Use `build.mjs --pending` and `package.mjs --pending` for an explicitly unpublished, self-contained `outputs/blacksite-pending-preview.html` without replacing release aliases/manifests. Never ship the pending-label build; rebuild normally only after a human release instruction. Run `pending-engine-tests.mjs` and `pending-browser-tests.mjs` alongside the existing relevant suites. See RELEASE-PENDING.md for the cumulative release queue.
+
 
 The workspace sources are `work/v6/`. `engine.js` is the pure seeded shelter simulation. `world.js` and `controller.js` are renderer/controller sources; run **`node work/v6/compose-renderer.mjs` after editing either**, which assembles `blacksite.js` using the preserved v5 renderer scaffold. Then **`node work/v6/build.mjs`** assembles the app from preserved v4 sources plus v6, writes `outputs/site/` and preserves locally vendored Three.js 0.180.0. Do not deploy a v4/v5-only build: it would remove the permanent game split and current features.
 

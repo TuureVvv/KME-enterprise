@@ -1,7 +1,7 @@
 {
   "current": {
-    "version": "2.0",
-    "name": "MAJOR ANTI TWEAK SYSTEM OFFLINE"
+    "version": "2.1",
+    "name": "NIKO NOOOO DONT DO IT"
   },
   "history": [
     {
@@ -16,6 +16,11 @@
       "version": "2.0",
       "name": "MAJOR ANTI TWEAK SYSTEM OFFLINE",
       "notes": "Permanent BLACKSITE shelter survival, separate rotating arcade, Tweakmax with a combined coping timer, game library and score history."
+    },
+    {
+      "version": "2.1",
+      "name": "NIKO NOOOO DONT DO IT",
+      "notes": "BLACKSITE shield-charge fix, illustrated shop, animated boss tells and named HP bars. Crew Chat removes the daily posting limit. Drawing side quests, private outcome handling and bounded image/history retention."
     }
   ]
 }

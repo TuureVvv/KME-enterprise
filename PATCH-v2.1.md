@@ -1,0 +1,13 @@
+# v2.1 — NIKO NOOOO DONT DO IT
+
+- **Shield Lancer fixed.** A charge deals one hit on actual reactor contact, with a visible impact and recovery. Frame rate no longer multiplies shelter damage. Near misses do not hit the reactor; independent attackers still hurt it.
+- **Bongo's shop rebuilt.** Illustrated cards explain all 18 purchases: actual effects, scope, cost, prerequisites and combinations. Separate Weapons / Attachments / Shelter / Supplies tabs, free owned-weapon switching including the starter pistol, and protection against buying pointless full repairs or turret upgrades before a turret exists.
+- **Bosses are readable.** Each boss has its name above its own HP bar, plus a named HUD with attack/reload cues. Mortgage Mole visibly digs, travels through dirt, locks an eruption warning and bursts out with debris. More claw, bow and cannon animation, shield sparks, sludge bubbles, plasma, vapour and falling-arrow effects.
+- **Crew Chat replaces Break Room.** No daily posting limit. Send messages and threaded replies, react and remove your own device's character messages. Chat is paged and polls a small revision response while visible rather than transferring every message with game snapshots.
+- **Drawing side quests.** Every third I'm tweaking visit suggests drawing; you can switch between drawing and Tweakmax. Draw a pineapple, goblin, rat or another prompt using touch, mouse, pen or keyboard. Colours, eraser, pen sizes, undo and clear are included. The same three/five-minute coping timer stays visible.
+- **Finish, answer, share.** Done → I resisted / Not this time → posts the tiny drawing automatically. Your answer is not in the chat message. Explicit resistance follows the existing consent/tracking settings; Not this time never creates a use report. Unfinished art stays local. Lost-response retries do not duplicate posts or check-ins.
+- **Bounded history.** Keep up to 10,000 text messages/replies and the newest 100 drawings for seven days. Drawings are at most 320 × 240 / 24 KiB, load only on tap, and expire without deleting their conversation. A daily chat-download budget and short burst guards protect resources. These safeguards bound chat's footprint; whole-project Supabase usage still depends on all app activity.
+
+BLACKSITE remains permanent. The current rotating cabinet, open ballot, character data, scores, cosmetics, privacy controls and shared boss damage caps are preserved. Combat upgrades remain run-only; everything is free.
+
+Validation covers the seeded simulation, 30/60/144/240-FPS shield regression, local PostgreSQL migration and privacy tests, real phone touch, responsive browser layouts, upload retries, extraction/save recovery and isolated demo operation without live group test writes.

@@ -1,6 +1,6 @@
-# KILLME ENTERPRISE · v2.0
+# KILLME ENTERPRISE · v2.1
 
-**MAJOR ANTI TWEAK SYSTEM OFFLINE**
+**NIKO NOOOO DONT DO IT**
 
 Play: https://tuurevvv.github.io/KME-enterprise/
 
@@ -15,3 +15,9 @@ Fullscreen/game mode is below the main game. Desktop: WASD move, mouse aim/fire,
 Historical patch names: v1.0 **major start**, v1.5 **tweakmax**. Every update has a signature name; see patches.json and the in-app history. Development details are in [ARCADE-DEVELOPER.md](ARCADE-DEVELOPER.md). Readable game sources are under src/blacksite; app.js is the integrated static client.
 
 GitHub Pages serves the client; Supabase stores admitted group data behind explicit guards and RLS. Never commit shared passwords or owner keys. The app is free and intended for actual private friends. No paid loot, betting, trading, cash-outs or real-world prizes. Three.js0.180.0 is vendored locally under MIT; see vendor/THREE-LICENSE.txt. All KME character models are procedural originals.
+
+## v2.1
+
+Shield Lancer charges hit the reactor once on real contact, independent of frame rate. Bongo’s shop now has illustrated weapon/attachment/shelter/supply cards, owned-weapon switching and purchase prerequisites. Mole dirt trails and eruptions, richer attack animations and hazards, and individual named boss health bars make fights readable.
+
+Crew Chat replaces Break Room with no daily message limit, paged messages/replies and respect reactions. Drawing side quests share the coping timer; Done then an explicit outcome posts a tiny drawing. Chat never displays the outcome. Only consented explicit resistance creates a check-in; Not this time creates no use report. Drawings load on tap, with 100 images / seven-day / 24 KiB limits; text history caps at 10,000 and chat downloads have a daily protective budget. See the privacy notice and CREW-CHAT.md.
