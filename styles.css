@@ -278,3 +278,44 @@ body{overflow-x:clip}
  .home-chat-heading .community-kicker{max-width:175px}
  .home-chat-disclosure{max-width:75px;font-size:8px}
 }
+
+/* v2.2.6: one calm card for progress, one readable row per crew member. */
+.community-personal>.community-rank,.community-personal>.community-crew{padding:19px;background:#1b2a1e;border:1px solid #465e3e;border-radius:12px;min-width:0;box-sizing:border-box}
+.community-rank>header h2{font-size:17px;line-height:1.4;letter-spacing:-.015em;margin:0;color:#d9e5c5}
+.community-rank #rank-strip{margin:15px 0 10px;padding:0;background:none;border:0;box-shadow:none}
+.community-rank #rank-strip>.row{gap:12px;align-items:center;flex-wrap:wrap}
+.community-rank #rank-strip .v2-kicker{font-size:8px;letter-spacing:.07em;color:#aabf92}
+.community-rank #rank-strip strong{display:block;font-size:13px;line-height:1.5;margin:10px 0;color:#dbe9c8;overflow-wrap:anywhere}
+.community-rank #rank-strip .progress-track{height:6px;margin:9px 0;background:#35482e}
+.community-rank #rank-strip small{font-size:10px;line-height:1.6;color:#aebf99;display:block}
+.community-rank #rank-strip .section-link,.community-rank>.section-link{font-size:10px;min-height:30px}
+.community-crew>header{margin-bottom:6px;gap:12px}
+.community-crew #squad-preview{display:flex;flex-direction:column;gap:0;width:100%;min-width:0}
+.community-crew .crew-roster-row.squad-person{display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;box-sizing:border-box;min-width:0;padding:15px 0;text-align:left;border-bottom:1px solid #405437}
+.community-crew .crew-roster-row.squad-person:last-child{border-bottom:0;padding-bottom:0}
+.community-crew .crew-roster-row>.avatar{width:40px;height:40px;align-self:center}
+.crew-roster-person{min-width:0}
+.community-crew .crew-roster-row .person-name{display:flex;align-items:center;flex-wrap:wrap;gap:5px;max-width:none;font-size:12px;line-height:1.5;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;min-width:0;color:#e0e9ce}
+.crew-you{font:8px monospace;color:#a4b98f}
+.crew-last-report{font-size:9px;line-height:1.65;color:#9fb48e;margin-top:4px;overflow-wrap:anywhere}
+.community-crew .crew-roster-row .person-time{display:block;text-align:right;white-space:nowrap;min-width:94px;margin:0}
+.crew-roster-row [data-crew-timer]{font:12px/1.4 monospace;color:#d3e6ae;font-variant-numeric:tabular-nums;display:block}
+.crew-roster-row .person-time small{display:block;font:7px/1.5 monospace;letter-spacing:.02em;color:#92a77f;margin-top:4px}
+.crew-report-badge{display:inline-grid;place-items:center;border-radius:50%;width:15px;height:15px;font:bold 10px/1 monospace;background:#d6ca83;color:#31402c;flex:none}
+.crew-report-badge[hidden]{display:none}
+@media(min-width:761px) and (max-width:1100px){.community-rank,.community-crew{grid-column:1/-1}.community-crew .crew-roster-row.squad-person{grid-template-columns:40px minmax(0,1fr) auto}.crew-roster-row [data-crew-timer]{font-size:14px}}
+@media(max-width:760px){
+ .community-personal>.community-rank{order:4;padding:16px}
+ .community-streak.hero{order:5}
+ .community-personal>.community-crew{order:6;padding:16px}
+ .community-social>.daily-noteboard{order:7}
+ .community-chat{order:8}
+ .community-crew .crew-roster-row.squad-person{grid-template-columns:36px minmax(0,1fr) auto;gap:10px;padding:14px 0}
+ .community-crew .crew-roster-row>.avatar{width:36px;height:36px}
+ .community-crew .crew-roster-row .person-name{font-size:12px}
+ .crew-last-report{font-size:9px}
+ .community-crew .crew-roster-row .person-time{min-width:90px}
+ .crew-roster-row [data-crew-timer]{font-size:12px}
+ .community-rank #rank-strip .section-link,.community-rank>.section-link{min-height:40px}
+}
+@media(max-width:359px){.community-crew .crew-roster-row.squad-person{grid-template-columns:30px minmax(0,1fr) auto;gap:8px}.community-crew .crew-roster-row>.avatar{width:30px;height:30px}.community-crew .crew-roster-row .person-time{min-width:79px}.crew-roster-row [data-crew-timer]{font-size:10px}.community-crew .crew-roster-row .person-name{font-size:11px}}

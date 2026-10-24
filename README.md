@@ -1,4 +1,4 @@
-# KILLME ENTERPRISE · v2.2.5
+# KILLME ENTERPRISE · v2.2.6
 
 **time to chat out the nicotine**
 
@@ -31,3 +31,7 @@ Drawing Studio is the default quick activity and a permanent Arcade cabinet. It 
 ## v2.2.5 layout hotfix
 
 Nicotine support comes first. Phone craving/check-in controls precede social features. Desktop has a support column alongside the shared note and Crew updates. Crew updates combines chat, drawings and recent check-ins, with filters, a composer above the feed and full-width artwork. Phone updates start collapsed without downloading image previews; explicit drawing-to-chat links open them. No migration. See PATCH-v2.2.5.md.
+
+## v2.2.6 roster hotfix
+
+A vertical On shift list shows all characters, live quit timers and the most recent available check-in. A small exclamation marks reports from the last hour. Rank and milestones are an always-visible card directly below nicotine check-ins and above the roster. Games-only characters retain disabled clocks. No migration. See PATCH-v2.2.6.md.

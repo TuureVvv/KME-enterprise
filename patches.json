@@ -1,6 +1,6 @@
 {
   "current": {
-    "version": "2.2.5",
+    "version": "2.2.6",
     "name": "time to chat out the nicotine"
   },
   "history": [
@@ -31,6 +31,11 @@
       "version": "2.2.5",
       "name": "time to chat out the nicotine",
       "notes": "Nicotine support first: phone urge/check-in controls precede social content. Unified Crew updates combines chat, drawings and recent check-ins with filters and a top composer. Collapsed mobile feed, full-width artwork, responsive desktop/tablet layout and drawing-to-chat links."
+    },
+    {
+      "version": "2.2.6",
+      "name": "time to chat out the nicotine",
+      "notes": "Vertical On shift roster shows every character, live quit timers and the latest report. A subtle exclamation marks check-ins from the last hour. Rank and milestones have their own calmer card directly below nicotine check-ins, above the roster."
     }
   ]
 }

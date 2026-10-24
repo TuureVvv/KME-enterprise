@@ -65,3 +65,9 @@ Checks: `community-core-tests.mjs`, `v22-db-tests.mjs`, `v22-browser-tests.mjs`,
 Nicotine support is the primary job. On phones the craving action and nicotine report buttons precede the streak, note and conversation. Desktop keeps them in the left support column alongside the note/social column. Crew updates combines chat/art and recent check-ins, with Everything / Chat & art / Check-ins filters and a composer above the feed. The old separate recent-news panel is gone; `feed-preview` is only a hidden compatibility sink. Preserve unified chronology and private, consented check-in semantics.
 
 `home-chat-panel` is a native keyboard-accessible details disclosure, initially closed at widths <=760px and expanded on desktop. Refreshes must not change a user toggle; only breakpoint crossings reset the default. Do not download preview images while collapsed. Explicit View chat from a drawing opens this disclosure and selects Chat & art. Home artwork uses the full chat width; originals still load only on request. No SQL changes are needed. Layout checks: `v225-layout-tests.mjs` (supports --live).
+
+## v2.2.6 Roster and milestone cards
+
+Overview has a full vertical On shift roster, with every character rather than five avatar thumbnails. `renderCrewRoster` / `updateCrewRoster` in community.js display live second-resolution clocks, games-only labels and the latest available shared report per character. A small exclamation marks check-ins less than one hour old, expires automatically, and is suppressed for games-only characters. Use existing admitted state; do not fetch extra health records or create reports to populate it.
+
+Rank/milestones is a standalone section card directly after nicotine check-ins and before the roster. Preserve this hierarchy at phone/tablet/desktop widths. Tests: v226-roster-tests.mjs (--live supported), alongside the v225 layout checks. No SQL change.
