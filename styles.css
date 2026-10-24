@@ -77,3 +77,204 @@ body{overflow-x:clip}
 @media(max-width:359px){.community-heading h1{font-size:40px}.community-heading .date{display:none}.daily-noteboard{padding:19px 15px 13px}.daily-noteboard h2{font-size:24px}.community-chat>header h2{font-size:27px}.community-streak .timer{gap:8px}.community-streak .timer-part strong{font-size:35px}.studio-tools button{min-width:36px}.studio-tools button span{font-size:5px}}
 @media(max-height:550px) and (orientation:landscape){.studio-expanded .studio-workspace{display:grid;grid-template-columns:50px 1fr 120px}.studio-expanded .studio-tools{display:grid;max-height:65dvh;overflow:auto}.studio-expanded .studio-main{width:min(100%,calc((100dvh - 165px)*1.333))}.studio-expanded .studio-viewport{max-height:none;max-width:none}.studio-expanded .studio-palette{display:grid;grid-template-columns:1fr;max-height:62dvh;overflow:auto}.studio-expanded .studio-swatches{grid-column:auto;grid-template-columns:repeat(6,1fr)}.studio-expanded .studio-footer{margin-top:5px}}
 .studio-workspace{user-select:none}.studio-prompt input{user-select:text}.art-original-scroll img{width:100%;max-width:100%;height:auto}.art-original-scroll.actual-pixels img{width:auto;max-width:none}
+
+/* v2.2.5: nicotine support first; conversation fits the space that remains. */
+.community-heading{margin-bottom:21px}
+.community-heading h1{font-size:clamp(43px,4.4vw,64px)}
+.community-grid{grid-template-columns:minmax(310px,.85fr) minmax(0,1.4fr);gap:24px}
+.community-personal,.community-social{min-width:0;display:grid;gap:18px;align-content:start}
+.community-social>.daily-noteboard{margin:0;padding:23px 24px 16px}
+.community-social .daily-noteboard h2{font-size:clamp(26px,2.5vw,33px);max-width:80%}
+.community-social .daily-noteboard>#daily-note{min-height:124px;font-size:17px}
+.community-social .daily-noteboard>header{display:block}
+.community-social .note-date{position:absolute;top:20px;right:21px;font-size:8px}
+.community-social .note-date small{display:none}
+.community-social .daily-noteboard>footer{align-items:start;font-size:8px;flex-wrap:wrap;gap:5px}
+.community-social .daily-noteboard>footer small{font-size:8px}
+.community-report-buttons.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0}
+.community-report-buttons.actions .action-button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;min-height:64px;padding:12px;min-width:0;width:100%;grid-column:auto}
+.community-report-buttons.actions .action-button strong{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+.community-report-buttons.actions .action-button small{margin:0;line-height:1.5}
+.community-checkins .daily-stats{margin:13px 0 0}
+.community-checkins .mini-stat span{font-size:8px}
+.community-crew{padding-bottom:0}
+.community-rank{padding-bottom:0}
+.community-personal>.community-recent{margin:0;padding-top:18px}
+.community-personal>.community-recent>header{display:block;margin-bottom:14px}
+.community-personal>.community-recent h2{font-size:25px;line-height:1.13;margin:8px 0 12px}
+.community-personal>.community-recent #feed-preview{grid-template-columns:minmax(0,1fr);gap:9px}
+.community-personal .community-event{padding:13px;min-width:0}
+.community-personal .community-event:last-child{grid-column:auto}
+.community-event>div{min-width:0;overflow-wrap:anywhere}
+.community-chat{width:100%;box-sizing:border-box}
+.home-chat-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;padding:23px 24px;background:linear-gradient(130deg,#2b402c,#223629);cursor:pointer}
+.home-chat-heading::-webkit-details-marker{display:none}
+.home-chat-heading:focus-visible{outline:3px solid #d2e5a7;outline-offset:-4px;border-radius:12px}
+.home-chat-heading .community-kicker{font-size:8px;letter-spacing:.055em}
+.home-chat-heading h2{font-size:32px;line-height:1.05;letter-spacing:-.045em;margin:9px 0;color:#e4edcd}
+.home-chat-heading p{font-size:11px;line-height:1.6;margin:0;color:#afc3a1}
+.home-chat-disclosure{font:9px/1.5 monospace;color:#cfdfa9;flex:none;text-align:right}
+.community-chat[open] .chat-show,.community-chat:not([open]) .chat-hide{display:none}
+.community-chat .chat-hide{white-space:nowrap}
+#home-chat-form{padding:18px 22px;border-top:1px solid #526a45;border-bottom:1px solid #526a45}
+#home-chat-form>.home-chat-compose-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.home-chat-compose-head>label{font:8px/1.5 monospace;letter-spacing:.08em;color:#bdcda8}
+.home-chat-compose-head>.section-link{font-size:10px;white-space:nowrap;min-height:28px}
+#home-chat-form>.home-chat-compose-row{display:flex;align-items:stretch;gap:10px}
+#home-chat-body{min-height:65px;max-height:220px;min-width:0;flex:1;width:auto;font-size:14px}
+#home-chat-form #home-chat-send{font-size:12px;min-width:70px;padding:12px;white-space:nowrap}
+.home-chat-feed-label{display:flex;justify-content:space-between;gap:10px;font:8px/1.6 monospace;color:#9db18c;padding:17px 22px 7px}
+#home-chat-feed{max-height:960px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#647b50 #1c2b20;padding:0 22px;overflow-wrap:anywhere}
+#home-chat-feed:focus-visible{outline:2px solid #9dbb75;outline-offset:-3px}
+#home-chat-feed .lounge-post{width:100%;box-sizing:border-box;min-width:0}
+#home-chat-feed .post-head{flex-wrap:wrap;gap:10px}
+#home-chat-feed .post-head>.post-author{min-width:0;flex:1}
+#home-chat-feed .post-author strong{overflow-wrap:anywhere}
+#home-chat-feed .post-head>.section-link{font-size:9px;flex:none}
+#home-chat-feed .post-body{font-size:14px;max-width:none;width:100%;box-sizing:border-box}
+#home-chat-feed .chat-drawing{max-width:none;width:100%;box-sizing:border-box;margin:13px 0}
+#home-chat-feed .chat-drawing img{width:100%;height:auto;max-width:none;display:block}
+#home-chat-feed .studio-preview figcaption{flex-wrap:wrap;align-items:center}
+#home-chat-feed .studio-preview figcaption>button{min-height:32px;font-size:10px}
+#home-chat-feed .chat-image-load{min-height:160px}
+#home-chat-feed .post-actions{display:flex;flex-wrap:wrap;gap:8px}
+#home-chat-feed .post-actions button{min-height:34px;padding:7px 11px}
+.home-chat-footer{border-top:1px solid #4c653e;padding:15px 22px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.home-chat-footer>span{font:9px/1.6 monospace;color:#9fb68f;max-width:65%}
+.home-chat-footer>.section-link{font-size:10px;white-space:nowrap;min-height:36px}
+.home-chat-footer>div{display:flex;gap:15px;flex-wrap:wrap;justify-content:end}
+.home-chat-footer>div>.section-link{font-size:10px;min-height:36px}
+.home-update-filters{display:flex;gap:7px;padding:16px 22px 0;flex-wrap:wrap}
+.home-update-filters button{font:10px/1.4 monospace;padding:9px 12px;min-height:36px;border:1px solid #5f7950;border-radius:20px;color:#bdd0a5;background:transparent;cursor:pointer}
+.home-update-filters button[aria-pressed=true]{background:#cadfa2;border-color:#cadfa2;color:#253c2b}
+#home-chat-feed .timeline-checkin{margin:8px 0;padding:15px;background:#2b3b28;border-color:#4a6340;align-items:center}
+#home-chat-feed .timeline-checkin .timeline-kind{font:7px/1.5 monospace;letter-spacing:.06em;color:#9bb28a;display:block;margin-bottom:4px}
+#home-chat-feed .timeline-checkin p{margin:5px 0;font-size:12px}
+#home-chat-feed .timeline-checkin strong{font-size:12px}
+.community-home button:focus-visible,.community-home textarea:focus-visible{outline:2px solid #d4e6a7;outline-offset:3px}
+.community-draw-call{display:flex;flex-direction:column}
+.community-draw-call>.community-kicker{order:0}
+.community-draw-call>.craving{order:1;margin-top:12px}
+.community-draw-call>h2{display:none}
+.community-draw-call>p{order:2;margin:11px 0 0;max-width:90%}
+.community-draw-call>.section-link{order:3;align-self:start}
+@media(min-width:761px) and (max-width:1150px){
+ .community-grid{grid-template-columns:minmax(265px,.85fr) minmax(0,1.15fr);gap:18px}
+ .home-chat-heading{padding:20px;display:block}
+ .home-chat-disclosure{display:block;text-align:left;margin-top:12px}
+ .home-chat-heading p{max-width:280px}
+ .community-social>.daily-noteboard{padding:21px 19px 15px}
+ .community-social .daily-noteboard h2{font-size:27px;max-width:95%}
+ .community-social .daily-noteboard .community-kicker{font-size:7px}
+ .community-social .note-date{right:16px;top:15px}
+ #home-chat-feed{padding:0 17px}
+ #home-chat-form{padding:16px}
+ .home-chat-feed-label{padding-left:17px;padding-right:17px}
+ .home-chat-feed-label>span:last-child{display:none}
+ .community-report-buttons.actions .action-button{padding:10px}
+ .community-report-buttons.actions .action-button strong{font-size:11px}
+}
+@media(min-width:761px) and (max-width:1100px){
+ .community-grid{grid-template-columns:minmax(0,1fr);gap:23px}
+ .community-personal{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:18px}
+ .community-checkins,.community-personal>.v3-home-callout{grid-column:1/-1}
+ .community-checkins .daily-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .community-streak.hero{height:100%;box-sizing:border-box}
+ .community-streak .timer{gap:4px;justify-content:space-between}
+ .community-streak .timer-part strong{font-size:30px}
+ .community-draw-call{padding:18px}
+ .community-draw-call>.craving strong{font-size:19px}
+ .community-social .daily-noteboard h2{max-width:80%;font-size:31px}
+ .home-chat-heading{display:flex}
+ .home-chat-disclosure{margin:0;text-align:right}
+ .home-chat-heading p{max-width:none}
+ .home-chat-feed-label>span:last-child{display:block}
+}
+@media(max-width:760px){
+ .community-home{display:flex;flex-direction:column;gap:16px}
+ .community-grid,.community-personal,.community-social{display:contents}
+ .community-heading{order:0;margin:0;align-items:start}
+ .community-heading h1{font-size:38px;margin:8px 0 10px}
+ .community-heading .community-kicker{font-size:7px}
+ .community-heading p{margin:0;font-size:11px}
+ .community-heading .date{display:none}
+ .community-clockin{order:1;margin:0;padding:12px}
+ .clockin-buttons{margin-top:11px;gap:8px}
+ .clockin-buttons button{font-size:9px;min-height:42px;padding:9px 6px}
+ .community-streak.hero{order:4;padding:17px}
+ .community-streak .timer{margin:12px 0;gap:8px}
+ .community-streak .timer-part strong{font-size:36px}
+ .community-streak .hero-bottom{display:flex;align-items:center;gap:12px;justify-content:space-between}
+ .community-streak .hero-bottom button{margin:0;flex:none;min-height:30px}
+ .community-streak .hero-bottom>span{font-size:9px}
+ .community-draw-call{order:2;padding:15px}
+ .community-draw-call>h2,.community-draw-call>p{display:none}
+ .community-draw-call>.community-kicker{font-size:8px;margin-bottom:10px}
+ .community-draw-call .craving{min-height:62px;padding:12px 14px;margin-top:0}
+ .community-draw-call .craving strong{font-size:22px}
+ .community-draw-call .craving small{font-size:11px}
+ .community-draw-call>.section-link{margin-top:7px;min-height:28px;font-size:10px}
+ .community-checkins{order:3;margin-top:-6px;padding:15px}
+ .community-checkins .section-head{margin-bottom:12px}
+ .community-checkins h2{font-size:17px}
+ .community-checkins .section-link{min-height:28px}
+ .community-report-buttons.actions .action-button{min-height:62px;padding:11px}
+ .community-report-buttons.actions .action-button strong{font-size:13px}
+ .community-report-buttons.actions .action-button small{font-size:9px}
+ .community-checkins .mini-stat{padding:8px 4px}
+ .community-checkins .mini-stat strong{font-size:21px}
+ .community-checkins .mini-stat span{font-size:7px}
+ .community-checkins .v3-disabled-note{margin-top:10px;padding:10px;font-size:10px}
+ .community-social>.daily-noteboard{order:5;margin:2px 0 0;padding:20px 17px 14px}
+ .community-social .daily-noteboard h2{font-size:26px;max-width:100%;margin:11px 0 7px}
+ .community-social .daily-noteboard .community-kicker{font-size:7px;max-width:80%}
+ .community-social .daily-noteboard>#daily-note{min-height:96px;max-height:320px;font-size:17px}
+ .community-social .note-date{top:15px;right:15px}
+ .community-social .daily-noteboard>footer{display:block}
+ .community-social .daily-noteboard>footer small{display:none}
+ .community-chat{order:6;flex:none}
+ .home-chat-heading{padding:18px;gap:10px;display:flex}
+ .home-chat-heading>div{min-width:0}
+ .home-chat-heading .community-kicker{font-size:6px;letter-spacing:.025em}
+ .home-chat-heading h2{font-size:27px;margin:6px 0 0}
+ .home-chat-heading p{display:none}
+ .home-chat-disclosure{font-size:9px;max-width:90px}
+ .community-chat:not([open]) .home-chat-heading{min-height:85px;box-sizing:border-box}
+ #home-chat-form{padding:15px}
+ #home-chat-body{font-size:16px;line-height:1.5;min-height:72px}
+ #daily-note{font-size:17px}
+ #home-chat-form #home-chat-send{min-width:60px;min-height:44px}
+ .home-chat-compose-head>label{font-size:7px}
+ .home-chat-compose-head>.section-link{min-height:36px}
+ .home-chat-feed-label{padding:14px 15px 5px;font-size:7px}
+ .home-update-filters{padding:14px 15px 0;gap:6px}
+ .home-update-filters button{font-size:10px;padding:9px 11px;min-height:40px}
+ .home-chat-feed-label>span:last-child{display:none}
+ #home-chat-feed{max-height:none;overflow:visible;padding:0 15px}
+ #home-chat-feed .post-body{font-size:14px;line-height:1.65}
+ #home-chat-feed .post-actions button{min-height:40px}
+ .home-chat-footer{padding:14px 15px;display:block}
+ .home-chat-footer>span{display:block;max-width:none}
+ .home-chat-footer>.section-link{display:inline-block;margin-top:5px;min-height:40px}
+ .home-chat-footer>div{justify-content:start;margin-top:8px}
+ .home-chat-footer>div>.section-link{min-height:40px}
+ .community-crew{order:7;padding:17px 0 0}
+ .community-rank{order:8;padding:17px 0 0}
+ .community-rank>summary{min-height:30px}
+ .community-personal>.community-recent{order:9;padding-top:17px;margin:0}
+ .community-personal>.community-recent>header{display:flex;align-items:center}
+ .community-personal>.community-recent h2{font-size:24px;margin:7px 0 0}
+ .community-personal>.v3-home-callout{order:10}
+}
+@media(max-width:359px){
+ .community-heading h1{font-size:34px}
+ .community-streak .timer-part strong{font-size:31px}
+ .community-streak .timer{gap:7px}
+ .community-streak .hero-bottom{align-items:start}
+ .community-streak .hero-bottom>span{max-width:62%}
+ .community-report-buttons.actions .action-button strong{font-size:12px}
+ .community-report-buttons.actions .action-button small{font-size:8px}
+ .community-social .daily-noteboard h2{font-size:23px}
+ .home-chat-heading .community-kicker{max-width:175px}
+ .home-chat-disclosure{max-width:75px;font-size:8px}
+}

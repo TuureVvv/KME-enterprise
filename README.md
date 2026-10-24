@@ -1,4 +1,4 @@
-# KILLME ENTERPRISE · v2.2
+# KILLME ENTERPRISE · v2.2.5
 
 **time to chat out the nicotine**
 
@@ -8,7 +8,7 @@ BLACKSITE: Shelter Shift is the permanent 3D main game. Defend a shelter, scaven
 
 The separate Rotating Arcade holds shorter crew-voted games. No votes means no forced rotation. The game library preserves individual leaderboards and the rotating cabinet's published history.
 
-“I'm tweaking” starts Tweakmax and a visible three/five-minute coping timer together. Its difficulty escalates every four seconds. Bank a competitive score any time; **Bank & I resisted** records a resistance report only when explicitly requested and nicotine sharing is enabled. The timer is a coping tool, not a medical promise. Losing a minigame never means failing to resist nicotine.
+“I'm tweaking” opens Drawing Studio and a visible three/five-minute coping timer. Tweakmax remains selectable and runs alongside that timer. Its difficulty escalates every four seconds. Bank a competitive score any time; **Bank & I resisted** records a resistance report only when explicitly requested and nicotine sharing is enabled. The timer is a coping tool, not a medical promise. Losing a minigame never means failing to resist nicotine.
 
 Fullscreen/game mode is below the main game. Desktop: WASD move, mouse aim/fire, **E interact**, R parry, Space dash, Q vent, V infusion, F weapon. Phone: twin sticks and action buttons. The shop uses earned run scrap, never money; combat upgrades reset each raid. Cosmetics confer no permanent power.
 
@@ -27,3 +27,7 @@ Crew Chat replaces Break Room with no daily message limit, paged messages/replie
 Overview is the Common Room: a shared daily autosaving text page, recent chat with visible art and a composer, prominent clock-in controls, compact personal/crew panels and clearer recent events. The fact/workforce panels are removed from Overview.
 
 Drawing Studio is the default quick activity and a permanent Arcade cabinet. It has a 2048 × 1536 canvas, three layers, custom colours, fine brushes, opacity, fill/shapes, zoom/pan, undo/redo and lossless PNG downloads. The subject library contains 263 subjects and 15,780 combinations. Original drawings have no stroke/point/time cap and no old 24 KiB gate: originals upload in resumable verified pieces, while small previews keep the home feed fast. Saved legacy drafts migrate to IndexedDB without truncation. Old gallery files expire to manage storage. See PATCH-v2.2.md and CREW-CHAT.md.
+
+## v2.2.5 layout hotfix
+
+Nicotine support comes first. Phone craving/check-in controls precede social features. Desktop has a support column alongside the shared note and Crew updates. Crew updates combines chat, drawings and recent check-ins, with filters, a composer above the feed and full-width artwork. Phone updates start collapsed without downloading image previews; explicit drawing-to-chat links open them. No migration. See PATCH-v2.2.5.md.

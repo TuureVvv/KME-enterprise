@@ -1,4 +1,4 @@
-# Common Room, Crew Chat and Drawing Studio — v2.2
+# Common Room, Crew Chat and Drawing Studio — v2.2.5
 
 **time to chat out the nicotine**
 
@@ -37,3 +37,7 @@ Sources: chat.js (compatibility), drawing.js (quick-dialog bridge), community-co
 Migrations: v2.1 chat.sql, then v2.2 v22.sql. Preserve existing images, profiles, game data, privacy, boss limits and the rotating ballot. Follow AGENTS.md for future release authorization. Mark a release complete only after database and public client verification.
 
 Tests: community-core-tests.mjs, v22-db-tests.mjs, v22-browser-tests.mjs, v22-recovery-tests.mjs and relevant game regressions. They cover concurrent notes, >800-stroke recovery, >24 KiB originals, exact client-to-SQL transfer contracts, resume/hash/idempotence, real phone touch, IndexedDB drafts, immediate Overview pictures and private grants. Tests use isolated demo/local data, never fake live group records.
+
+## v2.2.5 front-page layout
+
+Crew updates unifies chat/art and recent nicotine check-ins, with three filters and the composer above messages. Full chat still contains conversations only. On phones this front-page panel starts collapsed; it fetches preview images only when expanded and near view. Explicit View chat after drawing opens the panel. Nicotine support controls precede the streak, daily page and social feed on phones. No database changes.

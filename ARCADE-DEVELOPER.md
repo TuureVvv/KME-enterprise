@@ -59,3 +59,9 @@ Sources: `community-core.js`, `art-api.js`, `studio.js`, `community.js`, `commun
 Drawing Studio is a permanent unscored cabinet under `drawing-studio`; it does not call competitive run APIs or invent boss damage. Keep BLACKSITE permanent and the existing rotating ballot/cabinet unchanged. The homepage shows recent chat and lazy small art previews with a composer; full-resolution originals load only on explicit request. Shared daily writing uses revision compare-and-swap, a client three-way merge and explicit overlap conflicts. Reset uses the server’s Europe/Helsinki calendar day. Preserve unsaved drafts instead of blindly overwriting.
 
 Checks: `community-core-tests.mjs`, `v22-db-tests.mjs`, `v22-browser-tests.mjs`, `v22-recovery-tests.mjs`, plus relevant game regressions. Test only isolated demo data or a local database; never create fake live drawings, messages, scores, votes or health reports.
+
+## v2.2.5 Overview layout
+
+Nicotine support is the primary job. On phones the craving action and nicotine report buttons precede the streak, note and conversation. Desktop keeps them in the left support column alongside the note/social column. Crew updates combines chat/art and recent check-ins, with Everything / Chat & art / Check-ins filters and a composer above the feed. The old separate recent-news panel is gone; `feed-preview` is only a hidden compatibility sink. Preserve unified chronology and private, consented check-in semantics.
+
+`home-chat-panel` is a native keyboard-accessible details disclosure, initially closed at widths <=760px and expanded on desktop. Refreshes must not change a user toggle; only breakpoint crossings reset the default. Do not download preview images while collapsed. Explicit View chat from a drawing opens this disclosure and selects Chat & art. Home artwork uses the full chat width; originals still load only on request. No SQL changes are needed. Layout checks: `v225-layout-tests.mjs` (supports --live).

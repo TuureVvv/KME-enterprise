@@ -1,6 +1,6 @@
 {
   "current": {
-    "version": "2.2",
+    "version": "2.2.5",
     "name": "time to chat out the nicotine"
   },
   "history": [
@@ -26,6 +26,11 @@
       "version": "2.2",
       "name": "time to chat out the nicotine",
       "notes": "A social Overview with shared daily writing, recent Crew Chat and visible drawings. Drawing Studio becomes the default quick distraction and a permanent Arcade mode. Full-quality originals, no drawing action caps, layers, zoom, fine tools and thousands of prompts."
+    },
+    {
+      "version": "2.2.5",
+      "name": "time to chat out the nicotine",
+      "notes": "Nicotine support first: phone urge/check-in controls precede social content. Unified Crew updates combines chat, drawings and recent check-ins with filters and a top composer. Collapsed mobile feed, full-width artwork, responsive desktop/tablet layout and drawing-to-chat links."
     }
   ]
 }
