@@ -1,3 +1,6 @@
 Supabase JavaScript SDK 2.118.0
 Copyright Supabase. MIT License: vendor/SUPABASE-LICENSE.txt
 Source: https://github.com/supabase/supabase-js
+
+
+Three.js 0.180.0 — MIT License. Vendored locally; see vendor/THREE-LICENSE.txt. https://github.com/mrdoob/three.js/tree/r180
