@@ -1,0 +1,353 @@
+[
+  {
+    "id": "ink-default",
+    "cost": 0,
+    "name": "Crew green",
+    "slot": "ink",
+    "sort": 1,
+    "style": "default",
+    "description": "The department original."
+  },
+  {
+    "id": "ink-ivory",
+    "cost": 0,
+    "name": "Paperwork ivory",
+    "slot": "ink",
+    "sort": 2,
+    "style": "ivory",
+    "description": "Clean lettering for questionable decisions."
+  },
+  {
+    "id": "ink-mint",
+    "cost": 15,
+    "name": "Mint without nicotine",
+    "slot": "ink",
+    "sort": 3,
+    "style": "mint",
+    "description": "A cool mint name."
+  },
+  {
+    "id": "ink-lilac",
+    "cost": 20,
+    "name": "Swamp lavender",
+    "slot": "ink",
+    "sort": 4,
+    "style": "lilac",
+    "description": "A little suspicious. Very purple."
+  },
+  {
+    "id": "ink-gold",
+    "cost": 30,
+    "name": "Management gold",
+    "slot": "ink",
+    "sort": 5,
+    "style": "gold",
+    "description": "Promoted yourself."
+  },
+  {
+    "id": "ink-coral",
+    "cost": 25,
+    "name": "Goblin coral",
+    "slot": "ink",
+    "sort": 6,
+    "style": "coral",
+    "description": "Warm, loud, unsponsored."
+  },
+  {
+    "id": "ink-sky",
+    "cost": 20,
+    "name": "After-hours blue",
+    "slot": "ink",
+    "sort": 7,
+    "style": "sky",
+    "description": "Clocking out of the kiosk."
+  },
+  {
+    "id": "effect-default",
+    "cost": 0,
+    "name": "Plain speaking",
+    "slot": "effect",
+    "sort": 10,
+    "style": "default",
+    "description": "Your name, without a light show."
+  },
+  {
+    "id": "effect-glow",
+    "cost": 30,
+    "name": "Desk lamp",
+    "slot": "effect",
+    "sort": 11,
+    "style": "glow",
+    "description": "A restrained coloured glow."
+  },
+  {
+    "id": "effect-shimmer",
+    "cost": 60,
+    "name": "Union glitter",
+    "slot": "effect",
+    "sort": 12,
+    "style": "shimmer",
+    "description": "A slow travelling highlight."
+  },
+  {
+    "id": "effect-prism",
+    "cost": 100,
+    "name": "Corporate rainbow",
+    "slot": "effect",
+    "sort": 13,
+    "style": "prism",
+    "description": "All departments, one name."
+  },
+  {
+    "id": "effect-pulse",
+    "cost": 50,
+    "name": "Quietly iconic",
+    "slot": "effect",
+    "sort": 14,
+    "style": "pulse",
+    "description": "A gentle glow cycle."
+  },
+  {
+    "id": "avatar-default",
+    "cost": 0,
+    "name": "Your original character",
+    "slot": "avatar",
+    "sort": 20,
+    "style": "default",
+    "description": "Keep the face you picked."
+  },
+  {
+    "id": "avatar-rat",
+    "cost": 30,
+    "name": "Rat supervisor",
+    "slot": "avatar",
+    "sort": 21,
+    "style": "rat",
+    "description": "It knows where the spare keys are."
+  },
+  {
+    "id": "avatar-mole",
+    "cost": 45,
+    "name": "Mortgage mole",
+    "slot": "avatar",
+    "sort": 22,
+    "style": "mole",
+    "description": "Burrowed out of a bad habit."
+  },
+  {
+    "id": "avatar-frog",
+    "cost": 35,
+    "name": "Pond accountant",
+    "slot": "avatar",
+    "sort": 23,
+    "style": "frog",
+    "description": "Has never approved a nicotine expense."
+  },
+  {
+    "id": "avatar-ghost",
+    "cost": 55,
+    "name": "Ex-pouch ghost",
+    "slot": "avatar",
+    "sort": 24,
+    "style": "ghost",
+    "description": "Haunting the empty tin."
+  },
+  {
+    "id": "avatar-wizard",
+    "cost": 70,
+    "name": "Delay wizard",
+    "slot": "avatar",
+    "sort": 25,
+    "style": "wizard",
+    "description": "Casts Wait A Minute."
+  },
+  {
+    "id": "avatar-plant",
+    "cost": 40,
+    "name": "Office fern",
+    "slot": "avatar",
+    "sort": 26,
+    "style": "plant",
+    "description": "Thriving out of spite."
+  },
+  {
+    "id": "motion-default",
+    "cost": 0,
+    "name": "Steady",
+    "slot": "motion",
+    "sort": 30,
+    "style": "default",
+    "description": "No animation."
+  },
+  {
+    "id": "motion-breathe",
+    "cost": 15,
+    "name": "Still breathing",
+    "slot": "motion",
+    "sort": 31,
+    "style": "breathe",
+    "description": "A slow, soft breathing loop."
+  },
+  {
+    "id": "motion-bob",
+    "cost": 25,
+    "name": "Goblin buoyancy",
+    "slot": "motion",
+    "sort": 32,
+    "style": "bob",
+    "description": "A gentle floating character."
+  },
+  {
+    "id": "motion-wiggle",
+    "cost": 35,
+    "name": "Rat energy",
+    "slot": "motion",
+    "sort": 33,
+    "style": "wiggle",
+    "description": "A tiny occasional wiggle."
+  },
+  {
+    "id": "motion-blink",
+    "cost": 40,
+    "name": "Sentient spreadsheet",
+    "slot": "motion",
+    "sort": 34,
+    "style": "blink",
+    "description": "The character blinks."
+  },
+  {
+    "id": "motion-orbit",
+    "cost": 80,
+    "name": "Astral employee",
+    "slot": "motion",
+    "sort": 35,
+    "style": "orbit",
+    "description": "An unhurried orbit of sparks."
+  },
+  {
+    "id": "frame-default",
+    "cost": 0,
+    "name": "Standard issue",
+    "slot": "frame",
+    "sort": 40,
+    "style": "default",
+    "description": "A simple clean frame."
+  },
+  {
+    "id": "frame-brass",
+    "cost": 15,
+    "name": "Brass pass",
+    "slot": "frame",
+    "sort": 41,
+    "style": "brass",
+    "description": "A warm metallic border."
+  },
+  {
+    "id": "frame-vines",
+    "cost": 30,
+    "name": "Reclaimed by nature",
+    "slot": "frame",
+    "sort": 42,
+    "style": "vines",
+    "description": "The office is becoming a forest."
+  },
+  {
+    "id": "frame-neon",
+    "cost": 45,
+    "name": "Night-shift neon",
+    "slot": "frame",
+    "sort": 43,
+    "style": "neon",
+    "description": "A teal-lit identity card."
+  },
+  {
+    "id": "frame-starlight",
+    "cost": 75,
+    "name": "Overqualified",
+    "slot": "frame",
+    "sort": 44,
+    "style": "starlight",
+    "description": "Stars around your portrait."
+  },
+  {
+    "id": "frame-prism",
+    "cost": 120,
+    "name": "Found the cheese",
+    "slot": "frame",
+    "sort": 45,
+    "style": "prism",
+    "description": "A shifting spectrum frame."
+  },
+  {
+    "id": "banner-default",
+    "cost": 0,
+    "name": "Swamp standard",
+    "slot": "banner",
+    "sort": 50,
+    "style": "default",
+    "description": "The familiar olive desk."
+  },
+  {
+    "id": "banner-tide",
+    "cost": 20,
+    "name": "Low tide",
+    "slot": "banner",
+    "sort": 51,
+    "style": "tide",
+    "description": "Quiet teal and moving water lines."
+  },
+  {
+    "id": "banner-dusk",
+    "cost": 25,
+    "name": "After-hours",
+    "slot": "banner",
+    "sort": 52,
+    "style": "dusk",
+    "description": "Plum and a distant sunset."
+  },
+  {
+    "id": "banner-amber",
+    "cost": 30,
+    "name": "Golden break",
+    "slot": "banner",
+    "sort": 53,
+    "style": "amber",
+    "description": "A warm break in the workday."
+  },
+  {
+    "id": "banner-moss",
+    "cost": 20,
+    "name": "Moss office",
+    "slot": "banner",
+    "sort": 54,
+    "style": "moss",
+    "description": "Greenery has claimed your desk."
+  },
+  {
+    "id": "banner-grid",
+    "cost": 40,
+    "name": "Terminal goblin",
+    "slot": "banner",
+    "sort": 55,
+    "style": "grid",
+    "description": "A green terminal grid."
+  },
+  {
+    "id": "banner-stars",
+    "cost": 70,
+    "name": "Astral desk",
+    "slot": "banner",
+    "sort": 56,
+    "style": "stars",
+    "description": "A night sky at the office."
+  },
+  {
+    "id": "banner-prism",
+    "cost": 100,
+    "name": "No department left behind",
+    "slot": "banner",
+    "sort": 57,
+    "style": "prism",
+    "description": "A subtle spectrum."
+  }
+]

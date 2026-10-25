@@ -1,6 +1,6 @@
-# KILLME ENTERPRISE · v2.2.6
+# KILLME ENTERPRISE · v2.9
 
-**time to chat out the nicotine**
+**quality of nicotine free life update**
 
 Play: https://tuurevvv.github.io/KME-enterprise/
 
@@ -20,11 +20,11 @@ GitHub Pages serves the client; Supabase stores admitted group data behind expli
 
 Shield Lancer charges hit the reactor once on real contact, independent of frame rate. Bongo’s shop now has illustrated weapon/attachment/shelter/supply cards, owned-weapon switching and purchase prerequisites. Mole dirt trails and eruptions, richer attack animations and hazards, and individual named boss health bars make fights readable.
 
-Crew Chat replaces Break Room with no daily message limit, paged messages/replies and respect reactions. Drawing side quests share the coping timer; Done then an explicit outcome posts a tiny drawing. Chat never displays the outcome. Only consented explicit resistance creates a check-in; Not this time creates no use report. Drawings load on tap, with 100 images / seven-day / 24 KiB limits; text history caps at 10,000 and chat downloads have a daily protective budget. See the privacy notice and CREW-CHAT.md.
+Crew Chat replaces Break Room with no daily message limit, paged messages/replies and respect reactions. Drawing side quests share the coping timer; Done then an explicit outcome posts a tiny drawing. Chat never displays the outcome. Only consented explicit resistance creates a check-in; Not this time creates no use report. The original small-drawing format used 100 images / seven-day / 24 KiB limits; v2.2 replaced that format with full-quality originals. text history caps at 10,000 and chat downloads have a daily protective budget. See the privacy notice and CREW-CHAT.md.
 
 ## v2.2
 
-Overview is the Common Room: a shared daily autosaving text page, recent chat with visible art and a composer, prominent clock-in controls, compact personal/crew panels and clearer recent events. The fact/workforce panels are removed from Overview.
+Overview is the Common Room: a shared autosaving text page (made permanent in v2.9), recent chat with visible art and a composer, prominent clock-in controls, compact personal/crew panels and clearer recent events. The fact/workforce panels are removed from Overview.
 
 Drawing Studio is the default quick activity and a permanent Arcade cabinet. It has a 2048 × 1536 canvas, three layers, custom colours, fine brushes, opacity, fill/shapes, zoom/pan, undo/redo and lossless PNG downloads. The subject library contains 263 subjects and 15,780 combinations. Original drawings have no stroke/point/time cap and no old 24 KiB gate: originals upload in resumable verified pieces, while small previews keep the home feed fast. Saved legacy drafts migrate to IndexedDB without truncation. Old gallery files expire to manage storage. See PATCH-v2.2.md and CREW-CHAT.md.
 
@@ -35,3 +35,15 @@ Nicotine support comes first. Phone craving/check-in controls precede social fea
 ## v2.2.6 roster hotfix
 
 A vertical On shift list shows all characters, live quit timers and the most recent available check-in. A small exclamation marks reports from the last hour. Rank and milestones are an always-visible card directly below nicotine check-ins and above the roster. Games-only characters retain disabled clocks. No migration. See PATCH-v2.2.6.md.
+
+## v2.9 quality update
+
+The shared noticeboard has an editable title and permanent text, with revision checks, recoverable drafts and explicit conflict handling. Crew updates defaults to chat and artwork, includes replies and has refresh/retry controls. Text composers preserve local drafts and idempotent send receipts. Overview has a character banner, clickable character sheets and rotating headlines.
+
+The free wardrobe has 39 items across six slots: name ink, name effect, avatar, motion, frame and banner. Saved art, validated games and explicit consented resistance earn capped cosmetic credit. Purchases and equipped looks are stored on the server and follow the character across devices; there is no trading or combat power.
+
+Chat combines conversation and incident history with phone tabs. Play combines BLACKSITE, the rotating cabinet, Drawing Studio and the boss campaign; records, loot, library, votes and history are expandable. Nicotine support stays ahead of social features on phones.
+
+The website is installable with an optional per-device Web Push subscription: generic crew updates, coping timers and an optional daily reminder. iOS16.4+ requires Home Screen installation; Android requires a compatible browser. Permission is requested only from an explicit button. Private push keys/endpoints and a bounded delivery queue stay on the server. Physical phone delivery must be checked using the built-in test after installation.
+
+Current development build: `node work/v7/build.mjs --pending`, then `node work/v7/package.mjs --pending`. Read src/quality/DEVELOPER.md before changing this layer. Never rebuild with v6 alone.

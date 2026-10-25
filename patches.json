@@ -1,7 +1,7 @@
 {
   "current": {
-    "version": "2.2.6",
-    "name": "time to chat out the nicotine"
+    "version": "2.9",
+    "name": "quality of nicotine free life update"
   },
   "history": [
     {
@@ -36,6 +36,11 @@
       "version": "2.2.6",
       "name": "time to chat out the nicotine",
       "notes": "Vertical On shift roster shows every character, live quit timers and the latest report. A subtle exclamation marks check-ins from the last hour. Rank and milestones have their own calmer card directly below nicotine check-ins, above the roster."
+    },
+    {
+      "version": "2.9",
+      "name": "quality of nicotine free life update",
+      "notes": "Permanent editable noticeboard, reliable messages and replies, a shared cosmetic wardrobe, profile banners/cards, combined Chat and Play hubs, rotating greetings and opt-in installed-app notifications."
     }
   ]
 }

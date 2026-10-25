@@ -1,0 +1,23 @@
+begin;
+create table if not exists kme_private.noticeboard(singleton boolean primary key default true check(singleton),title text not null default 'The collective thought.' check(char_length(title) between 1 and 100),body text not null default '' check(char_length(body)<=12000),revision bigint not null default 0,updated_at timestamptz not null default now(),profile_id uuid references public.kme_profiles(id) on delete set null);
+insert into kme_private.noticeboard(singleton,body) values(true,coalesce((select body from kme_private.daily_note order by day desc,updated_at desc limit 1),'')) on conflict do nothing;
+create table if not exists kme_private.cosmetic_catalog(id text primary key,slot text not null check(slot in('ink','effect','avatar','motion','frame','banner')),name text not null,description text not null,cost integer not null check(cost between 0 and 500),style text not null,sort integer not null);
+create table if not exists kme_private.cosmetic_wallet(profile_id uuid primary key references public.kme_profiles(id) on delete cascade,balance integer not null default 20 check(balance>=0),earned integer not null default 20 check(earned>=0));
+create table if not exists kme_private.cosmetic_owned(profile_id uuid references public.kme_profiles(id) on delete cascade,item_id text references kme_private.cosmetic_catalog(id),unlocked_at timestamptz not null default now(),primary key(profile_id,item_id));
+create table if not exists kme_private.appearances(profile_id uuid primary key references public.kme_profiles(id) on delete cascade,items jsonb not null default '{}'::jsonb,revision bigint not null default 0);
+create table if not exists kme_private.cosmetic_earnings(id uuid primary key default gen_random_uuid(),profile_id uuid not null references public.kme_profiles(id) on delete cascade,user_id uuid not null references auth.users(id) on delete cascade,day date not null default (now() at time zone 'Europe/Helsinki')::date,category text not null,receipt text not null unique,amount integer not null check(amount between 1 and 50),created_at timestamptz not null default now());
+create index if not exists cosmetic_earn_device_day on kme_private.cosmetic_earnings(user_id,day,category);
+create index if not exists cosmetic_earn_profile_day on kme_private.cosmetic_earnings(profile_id,day,category);
+create index if not exists cosmetic_owned_item on kme_private.cosmetic_owned(item_id);
+create index if not exists noticeboard_profile on kme_private.noticeboard(profile_id);
+alter table kme_private.noticeboard enable row level security;
+alter table kme_private.cosmetic_catalog enable row level security;
+alter table kme_private.cosmetic_wallet enable row level security;
+alter table kme_private.cosmetic_owned enable row level security;
+alter table kme_private.appearances enable row level security;
+alter table kme_private.cosmetic_earnings enable row level security;
+revoke all on kme_private.noticeboard,kme_private.cosmetic_catalog,kme_private.cosmetic_wallet,kme_private.cosmetic_owned,kme_private.appearances,kme_private.cosmetic_earnings from public,anon,authenticated;
+insert into kme_private.cosmetic_wallet(profile_id) select id from public.kme_profiles on conflict do nothing;
+notify pgrst,'reload schema';
+commit;
+

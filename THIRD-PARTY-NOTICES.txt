@@ -4,3 +4,5 @@ Source: https://github.com/supabase/supabase-js
 
 
 Three.js 0.180.0 — MIT License. Vendored locally; see vendor/THREE-LICENSE.txt. https://github.com/mrdoob/three.js/tree/r180
+
+Optional server notification sender imports web-push 3.6.7, Copyright 2015 Marco Castelluccio, Mozilla Public License 2.0. Source: https://github.com/web-push-libs/web-push/tree/v3.6.7 . License: https://www.mozilla.org/MPL/2.0/ . No web-push library source is embedded in the browser client.

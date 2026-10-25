@@ -597,7 +597,7 @@ $('urge-dialog').addEventListener('cancel',e=>{e.preventDefault();closeQuick();}
 document.addEventListener('click',async event=>{const b=event.target.closest('button'),action=b?.dataset.v4;if(!action)return;if(action==='vote'){if(!me()){picker();return;}const ballot=state.world.arcade.ballot;const ok=await v3Action(()=>state.repo.arcadeVote(state.selected,ballot.id,b.dataset.choice));if(ok)showToast('Vote saved. You can change it before the round closes.');}else if(action==='urge')openQuick();else if(action==='close-urge')await closeQuick();else if(action==='urge-timer'){await closeQuick();startHold();}else if(action==='log-craving'){b.disabled=true;const saved=await logEvent('craving');if(saved){b.textContent='Craving logged for the crew ✓';}else b.disabled=false;}else if(action==='jump-vote')$('v4-ballot').scrollIntoView({block:'start',behavior:'smooth'});else if(action==='reload')location.reload();});
 const v4Lock=lock;lock=async function(signOut=true){KMEUrge.destroy();urgeInstance=null;await v4Lock(signOut);};
 
-window.KME_PATCHES={"current":{"version":"2.2.6","name":"time to chat out the nicotine"},"history":[{"version":"1.0","name":"major start"},{"version":"1.5","name":"tweakmax"},{"version":"2.0","name":"MAJOR ANTI TWEAK SYSTEM OFFLINE","notes":"Permanent BLACKSITE shelter survival, separate rotating arcade, Tweakmax with a combined coping timer, game library and score history."},{"version":"2.1","name":"NIKO NOOOO DONT DO IT","notes":"BLACKSITE shield-charge fix, illustrated shop, animated boss tells and named HP bars. Crew Chat removes the daily posting limit. Drawing side quests, private outcome handling and bounded image/history retention."},{"version":"2.2","name":"time to chat out the nicotine","notes":"A social Overview with shared daily writing, recent Crew Chat and visible drawings. Drawing Studio becomes the default quick distraction and a permanent Arcade mode. Full-quality originals, no drawing action caps, layers, zoom, fine tools and thousands of prompts."},{"version":"2.2.5","name":"time to chat out the nicotine","notes":"Nicotine support first: phone urge/check-in controls precede social content. Unified Crew updates combines chat, drawings and recent check-ins with filters and a top composer. Collapsed mobile feed, full-width artwork, responsive desktop/tablet layout and drawing-to-chat links."},{"version":"2.2.6","name":"time to chat out the nicotine","notes":"Vertical On shift roster shows every character, live quit timers and the latest report. A subtle exclamation marks check-ins from the last hour. Rank and milestones have their own calmer card directly below nicotine check-ins, above the roster."}]};
+window.KME_PATCHES={"current":{"version":"2.9","name":"quality of nicotine free life update"},"history":[{"version":"1.0","name":"major start"},{"version":"1.5","name":"tweakmax"},{"version":"2.0","name":"MAJOR ANTI TWEAK SYSTEM OFFLINE","notes":"Permanent BLACKSITE shelter survival, separate rotating arcade, Tweakmax with a combined coping timer, game library and score history."},{"version":"2.1","name":"NIKO NOOOO DONT DO IT","notes":"BLACKSITE shield-charge fix, illustrated shop, animated boss tells and named HP bars. Crew Chat removes the daily posting limit. Drawing side quests, private outcome handling and bounded image/history retention."},{"version":"2.2","name":"time to chat out the nicotine","notes":"A social Overview with shared daily writing, recent Crew Chat and visible drawings. Drawing Studio becomes the default quick distraction and a permanent Arcade mode. Full-quality originals, no drawing action caps, layers, zoom, fine tools and thousands of prompts."},{"version":"2.2.5","name":"time to chat out the nicotine","notes":"Nicotine support first: phone urge/check-in controls precede social content. Unified Crew updates combines chat, drawings and recent check-ins with filters and a top composer. Collapsed mobile feed, full-width artwork, responsive desktop/tablet layout and drawing-to-chat links."},{"version":"2.2.6","name":"time to chat out the nicotine","notes":"Vertical On shift roster shows every character, live quit timers and the latest report. A subtle exclamation marks check-ins from the last hour. Rank and milestones have their own calmer card directly below nicotine check-ins, above the roster."},{"version":"2.9","name":"quality of nicotine free life update","notes":"Permanent editable noticeboard, reliable messages and replies, a shared cosmetic wardrobe, profile banners/cards, combined Chat and Play hubs, rotating greetings and opt-in installed-app notifications."}]};
 /* BLACKSITE: Shelter Shift. Pure seeded simulation; the server owns banked rewards. */
 (function(root){'use strict';
 const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),len=(x,z)=>Math.hypot(x,z);
@@ -1056,3 +1056,500 @@ $('demo-door').hidden=LIVE;$('live-door').hidden=!LIVE;$('demo-banner').hidden=L
 if(storage.get('kme-sound')==='on'){$('sound-button').click();}
 setInterval(()=>{if(!$('app').hidden)renderTimers();},1000);
 if(LIVE){(async()=>{try{state.repo=await new LiveRepository().init();if(await state.repo.admitted())await openApp();}catch{$('door-error').textContent='Couldn’t connect to the group. Check your connection and try entering again.';}})();}
+
+/* v2.9: quality data adapters; server state stays authoritative. */
+window.KME_CATALOG=[
+  {
+    "id": "ink-default",
+    "cost": 0,
+    "name": "Crew green",
+    "slot": "ink",
+    "sort": 1,
+    "style": "default",
+    "description": "The department original."
+  },
+  {
+    "id": "ink-ivory",
+    "cost": 0,
+    "name": "Paperwork ivory",
+    "slot": "ink",
+    "sort": 2,
+    "style": "ivory",
+    "description": "Clean lettering for questionable decisions."
+  },
+  {
+    "id": "ink-mint",
+    "cost": 15,
+    "name": "Mint without nicotine",
+    "slot": "ink",
+    "sort": 3,
+    "style": "mint",
+    "description": "A cool mint name."
+  },
+  {
+    "id": "ink-lilac",
+    "cost": 20,
+    "name": "Swamp lavender",
+    "slot": "ink",
+    "sort": 4,
+    "style": "lilac",
+    "description": "A little suspicious. Very purple."
+  },
+  {
+    "id": "ink-gold",
+    "cost": 30,
+    "name": "Management gold",
+    "slot": "ink",
+    "sort": 5,
+    "style": "gold",
+    "description": "Promoted yourself."
+  },
+  {
+    "id": "ink-coral",
+    "cost": 25,
+    "name": "Goblin coral",
+    "slot": "ink",
+    "sort": 6,
+    "style": "coral",
+    "description": "Warm, loud, unsponsored."
+  },
+  {
+    "id": "ink-sky",
+    "cost": 20,
+    "name": "After-hours blue",
+    "slot": "ink",
+    "sort": 7,
+    "style": "sky",
+    "description": "Clocking out of the kiosk."
+  },
+  {
+    "id": "effect-default",
+    "cost": 0,
+    "name": "Plain speaking",
+    "slot": "effect",
+    "sort": 10,
+    "style": "default",
+    "description": "Your name, without a light show."
+  },
+  {
+    "id": "effect-glow",
+    "cost": 30,
+    "name": "Desk lamp",
+    "slot": "effect",
+    "sort": 11,
+    "style": "glow",
+    "description": "A restrained coloured glow."
+  },
+  {
+    "id": "effect-shimmer",
+    "cost": 60,
+    "name": "Union glitter",
+    "slot": "effect",
+    "sort": 12,
+    "style": "shimmer",
+    "description": "A slow travelling highlight."
+  },
+  {
+    "id": "effect-prism",
+    "cost": 100,
+    "name": "Corporate rainbow",
+    "slot": "effect",
+    "sort": 13,
+    "style": "prism",
+    "description": "All departments, one name."
+  },
+  {
+    "id": "effect-pulse",
+    "cost": 50,
+    "name": "Quietly iconic",
+    "slot": "effect",
+    "sort": 14,
+    "style": "pulse",
+    "description": "A gentle glow cycle."
+  },
+  {
+    "id": "avatar-default",
+    "cost": 0,
+    "name": "Your original character",
+    "slot": "avatar",
+    "sort": 20,
+    "style": "default",
+    "description": "Keep the face you picked."
+  },
+  {
+    "id": "avatar-rat",
+    "cost": 30,
+    "name": "Rat supervisor",
+    "slot": "avatar",
+    "sort": 21,
+    "style": "rat",
+    "description": "It knows where the spare keys are."
+  },
+  {
+    "id": "avatar-mole",
+    "cost": 45,
+    "name": "Mortgage mole",
+    "slot": "avatar",
+    "sort": 22,
+    "style": "mole",
+    "description": "Burrowed out of a bad habit."
+  },
+  {
+    "id": "avatar-frog",
+    "cost": 35,
+    "name": "Pond accountant",
+    "slot": "avatar",
+    "sort": 23,
+    "style": "frog",
+    "description": "Has never approved a nicotine expense."
+  },
+  {
+    "id": "avatar-ghost",
+    "cost": 55,
+    "name": "Ex-pouch ghost",
+    "slot": "avatar",
+    "sort": 24,
+    "style": "ghost",
+    "description": "Haunting the empty tin."
+  },
+  {
+    "id": "avatar-wizard",
+    "cost": 70,
+    "name": "Delay wizard",
+    "slot": "avatar",
+    "sort": 25,
+    "style": "wizard",
+    "description": "Casts Wait A Minute."
+  },
+  {
+    "id": "avatar-plant",
+    "cost": 40,
+    "name": "Office fern",
+    "slot": "avatar",
+    "sort": 26,
+    "style": "plant",
+    "description": "Thriving out of spite."
+  },
+  {
+    "id": "motion-default",
+    "cost": 0,
+    "name": "Steady",
+    "slot": "motion",
+    "sort": 30,
+    "style": "default",
+    "description": "No animation."
+  },
+  {
+    "id": "motion-breathe",
+    "cost": 15,
+    "name": "Still breathing",
+    "slot": "motion",
+    "sort": 31,
+    "style": "breathe",
+    "description": "A slow, soft breathing loop."
+  },
+  {
+    "id": "motion-bob",
+    "cost": 25,
+    "name": "Goblin buoyancy",
+    "slot": "motion",
+    "sort": 32,
+    "style": "bob",
+    "description": "A gentle floating character."
+  },
+  {
+    "id": "motion-wiggle",
+    "cost": 35,
+    "name": "Rat energy",
+    "slot": "motion",
+    "sort": 33,
+    "style": "wiggle",
+    "description": "A tiny occasional wiggle."
+  },
+  {
+    "id": "motion-blink",
+    "cost": 40,
+    "name": "Sentient spreadsheet",
+    "slot": "motion",
+    "sort": 34,
+    "style": "blink",
+    "description": "The character blinks."
+  },
+  {
+    "id": "motion-orbit",
+    "cost": 80,
+    "name": "Astral employee",
+    "slot": "motion",
+    "sort": 35,
+    "style": "orbit",
+    "description": "An unhurried orbit of sparks."
+  },
+  {
+    "id": "frame-default",
+    "cost": 0,
+    "name": "Standard issue",
+    "slot": "frame",
+    "sort": 40,
+    "style": "default",
+    "description": "A simple clean frame."
+  },
+  {
+    "id": "frame-brass",
+    "cost": 15,
+    "name": "Brass pass",
+    "slot": "frame",
+    "sort": 41,
+    "style": "brass",
+    "description": "A warm metallic border."
+  },
+  {
+    "id": "frame-vines",
+    "cost": 30,
+    "name": "Reclaimed by nature",
+    "slot": "frame",
+    "sort": 42,
+    "style": "vines",
+    "description": "The office is becoming a forest."
+  },
+  {
+    "id": "frame-neon",
+    "cost": 45,
+    "name": "Night-shift neon",
+    "slot": "frame",
+    "sort": 43,
+    "style": "neon",
+    "description": "A teal-lit identity card."
+  },
+  {
+    "id": "frame-starlight",
+    "cost": 75,
+    "name": "Overqualified",
+    "slot": "frame",
+    "sort": 44,
+    "style": "starlight",
+    "description": "Stars around your portrait."
+  },
+  {
+    "id": "frame-prism",
+    "cost": 120,
+    "name": "Found the cheese",
+    "slot": "frame",
+    "sort": 45,
+    "style": "prism",
+    "description": "A shifting spectrum frame."
+  },
+  {
+    "id": "banner-default",
+    "cost": 0,
+    "name": "Swamp standard",
+    "slot": "banner",
+    "sort": 50,
+    "style": "default",
+    "description": "The familiar olive desk."
+  },
+  {
+    "id": "banner-tide",
+    "cost": 20,
+    "name": "Low tide",
+    "slot": "banner",
+    "sort": 51,
+    "style": "tide",
+    "description": "Quiet teal and moving water lines."
+  },
+  {
+    "id": "banner-dusk",
+    "cost": 25,
+    "name": "After-hours",
+    "slot": "banner",
+    "sort": 52,
+    "style": "dusk",
+    "description": "Plum and a distant sunset."
+  },
+  {
+    "id": "banner-amber",
+    "cost": 30,
+    "name": "Golden break",
+    "slot": "banner",
+    "sort": 53,
+    "style": "amber",
+    "description": "A warm break in the workday."
+  },
+  {
+    "id": "banner-moss",
+    "cost": 20,
+    "name": "Moss office",
+    "slot": "banner",
+    "sort": 54,
+    "style": "moss",
+    "description": "Greenery has claimed your desk."
+  },
+  {
+    "id": "banner-grid",
+    "cost": 40,
+    "name": "Terminal goblin",
+    "slot": "banner",
+    "sort": 55,
+    "style": "grid",
+    "description": "A green terminal grid."
+  },
+  {
+    "id": "banner-stars",
+    "cost": 70,
+    "name": "Astral desk",
+    "slot": "banner",
+    "sort": 56,
+    "style": "stars",
+    "description": "A night sky at the office."
+  },
+  {
+    "id": "banner-prism",
+    "cost": 100,
+    "name": "No department left behind",
+    "slot": "banner",
+    "sort": 57,
+    "style": "prism",
+    "description": "A subtle spectrum."
+  }
+];
+const qCatalog=new Map(KME_CATALOG.map(x=>[x.id,x]));
+LiveRepository.prototype.noticeLoad=function(revision=null){return liveRpc(this,'kme_noticeboard',{p_known_revision:revision});};
+LiveRepository.prototype.noticeSave=function(profile,revision,title,body){return liveRpc(this,'kme_noticeboard_save',{p_profile_id:profile,p_revision:revision,p_title:title,p_body:body});};
+LiveRepository.prototype.wardrobe=function(profile){return liveRpc(this,'kme_wardrobe',{p_profile_id:profile});};
+LiveRepository.prototype.cosmetic=function(profile,action,item){return liveRpc(this,'kme_cosmetic',{p_profile_id:profile,p_action:action,p_item_id:item});};
+LiveRepository.prototype.updates=function(revision=null){return liveRpc(this,'kme_updates',{p_known_revision:revision});};
+const qLiveSocial=LiveRepository.prototype.social;LiveRepository.prototype.social=async function(action,profile,target=null,body=null){if(!['post','comment'].includes(action))return qLiveSocial.call(this,action,profile,target,body);this.qualitySends??=new Map();const key=JSON.stringify([action,profile,target,body]),id=this.qualitySends.get(key)||uid();this.qualitySends.set(key,id);const r=chatResult(await liveRpc(this,'kme_chat_send',{p_profile_id:profile,p_id:id,p_body:body,p_parent_id:action==='comment'?target:null}));this.qualitySends.delete(key);chatRevision=null;chatAt=0;await chatLoad(false,true);await loadCrewUpdates(true);return r;};
+function qDemo(repo){repo.data.quality??={board:{title:'The collective thought.',body:repo.data.dailyNote?.body||'',revision:0},wallets:{},owned:{},appearances:{},earnings:[]};return repo.data.quality;}
+function qWallet(repo,id){return qDemo(repo).wallets[id]??={balance:20,earned:20};}
+function qDemoEarn(repo,id,category,receipt){const q=qDemo(repo),day=helsinkiDay(),cap={art:1,game:3,resisted:1}[category],amount={art:20,game:10,resisted:5}[category];if(!cap||q.earnings.some(x=>x.receipt===receipt)||q.earnings.filter(x=>x.day===day&&x.category===category).length>=cap)return;q.earnings.push({profile_id:id,category,receipt,amount,day});const w=qWallet(repo,id);w.balance+=amount;w.earned+=amount;repo.save();}
+DemoRepository.prototype.noticeLoad=async function(revision=null){const n=qDemo(this).board;return{ok:true,...n,permanent:true,unchanged:revision===n.revision};};
+DemoRepository.prototype.noticeSave=async function(profile,revision,title,body){const n=qDemo(this).board;if(n.body===body&&n.title===title)return{ok:true,...n};if(n.revision!==revision)return{ok:false,conflict:true,current:{...n}};Object.assign(n,{title:title.trim(),body,revision:n.revision+1,updated_at:new Date().toISOString(),profile_id:profile});this.save();return{ok:true,...n};};
+DemoRepository.prototype.wardrobe=async function(id){const q=qDemo(this);return{ok:true,catalog:KME_CATALOG,wallet:qWallet(this,id),owned:q.owned[id]||[],appearance:q.appearances[id]||{},today:Object.fromEntries(['art','game','resisted'].map(c=>[c,q.earnings.filter(e=>e.profile_id===id&&e.day===helsinkiDay()&&e.category===c).length]))};};
+DemoRepository.prototype.cosmetic=async function(id,action,key){const item=qCatalog.get(key),q=qDemo(this),w=qWallet(this,id),owned=q.owned[id]??=[];if(!item)throw Error('Unknown cosmetic.');if(action==='unlock'&&item.cost&&!owned.includes(key)){if(w.balance<item.cost)return{ok:false,message:'Earn a little more confetti first.'};w.balance-=item.cost;owned.push(key);}if(item.cost&&!owned.includes(key))throw Error('Unlock that cosmetic first.');(q.appearances[id]??={})[item.slot]=key;this.save();return{ok:true,appearance:q.appearances[id],balance:w.balance};};
+DemoRepository.prototype.updates=async function(revision=null){const rev=this.data.v2.chatRevision||1;if(revision===rev)return{ok:true,unchanged:true,revision:rev};const all=this.data.v2.posts.filter(p=>!p.deleted_at).sort((a,b)=>b.created_at.localeCompare(a.created_at)||b.id.localeCompare(a.id)).slice(0,20);return{ok:true,revision:rev,items:all.map(p=>({...p,own_device:p.created_by===this.userId,can_delete:p.created_by===this.userId,votes:this.data.v2.votes.filter(v=>v.post_id===p.id).length,comment_count:this.data.v2.posts.filter(c=>c.parent_id===p.id).length,drawing:!!this.data.v2.art?.some(a=>a.post_id===p.id)||this.data.v2.drawings.some(a=>a.post_id===p.id),full_art:!!this.data.v2.art?.some(a=>a.post_id===p.id)}))};};
+const qDemoWorld=DemoRepository.prototype.world;DemoRepository.prototype.world=async function(){const w=await qDemoWorld.call(this);return{...w,quality:true,appearances:structuredClone(qDemo(this).appearances)};};
+const qDemoEvent=DemoRepository.prototype.addEvent;DemoRepository.prototype.addEvent=async function(v){const r=await qDemoEvent.call(this,v);if(v.kind==='resisted'&&this.data.v3?.privacy?.allow_nicotine&&this.data.profiles.find(p=>p.id===v.profile_id)?.tracking_enabled!==false)qDemoEarn(this,v.profile_id,'resisted','report:'+r.id);return r;};
+const qDemoArt=DemoRepository.prototype.artSubmit;DemoRepository.prototype.artSubmit=async function(profile,receipt,progress){const r=await qDemoArt.call(this,profile,receipt,progress);qDemoEarn(this,profile,'art','art:'+receipt.id);return r;};
+for(const name of['reliefFinish','blacksiteFinish','extractionFinish']){const before=DemoRepository.prototype[name];DemoRepository.prototype[name]=async function(...args){const r=await before.apply(this,args),run=this.data.v3?.runs.find(x=>x.id===args[0])||this.data.v4?.runs?.find(x=>x.id===args[0]);if(run&&Date.now()-(run.started||Date.parse(run.started_at))>=(name==='reliefFinish'?10000:20000)&&(r.score||0)>0)qDemoEarn(this,run.profile_id,'game','run:'+args[0]);return r;};}
+const qDemoDelete=DemoRepository.prototype.deleteProfile;DemoRepository.prototype.deleteProfile=async function(id,name){const r=await qDemoDelete.call(this,id,name),q=qDemo(this);delete q.wallets[id];delete q.owned[id];delete q.appearances[id];q.earnings=q.earnings.filter(e=>e.profile_id!==id);this.save();return r;};
+const qDemoExport=DemoRepository.prototype.exportProfile;DemoRepository.prototype.exportProfile=async function(id){const q=qDemo(this);return{...await qDemoExport.call(this,id),wardrobe:qWallet(this,id),cosmetics:q.owned[id]||[],appearance:q.appearances[id]||{},cosmetic_earnings:q.earnings.filter(e=>e.profile_id===id)};};
+let qUpdates={repo:null,rows:[],revision:null,loading:false,last:0,error:'',ready:false,queued:false,generation:0};
+async function loadCrewUpdates(force=false){if(!state.repo||!state.world?.quality||document.hidden)return;if(qUpdates.repo!==state.repo)qUpdates={repo:state.repo,rows:[],revision:null,loading:false,last:0,error:'',ready:false,queued:false,generation:qUpdates.generation+1};if(qUpdates.loading){qUpdates.queued||=force;return;}if(!force&&Date.now()-qUpdates.last<12000)return;const repo=state.repo,epoch=qUpdates.generation;qUpdates.loading=true;qUpdates.last=Date.now();try{const r=chatResult(await repo.updates(force?null:qUpdates.revision));if(repo!==state.repo||epoch!==qUpdates.generation)return;if(!r.unchanged){qUpdates.rows=r.items||[];for(const item of qUpdates.rows)if(item.parent_root)chatRows=chatMerge(chatRows,[item.parent_root]);qUpdates.revision=r.revision;}qUpdates.ready=true;qUpdates.error='';}catch(e){qUpdates.error=e.message;}finally{if(epoch===qUpdates.generation){qUpdates.loading=false;renderHome();if(qUpdates.queued){qUpdates.queued=false;loadCrewUpdates(true);}}}}
+const qChatLoad=chatLoad;chatLoad=async function(older=false,force=false){if(state.world?.quality&&state.page==='home'&&!older&&!force)return loadCrewUpdates(false);const r=await qChatLoad(older,force);if(force&&state.world?.quality)await loadCrewUpdates(true);return r;};
+const qPostMarkup=postMarkup;postMarkup=function(p,thread=false){let html=qPostMarkup(p,thread);if(p.parent_id&&!thread)html=html.replace('<p class="post-body">','<span class="q-reply-label">REPLY TO A CONVERSATION</span><p class="post-body">').replace('data-post="'+esc(p.id)+'">'+(p.comment_count||0)+' replies ↗','data-post="'+esc(p.parent_id)+'">Open conversation ↗');return html;};
+window.addEventListener('online',()=>{loadCrewUpdates(true);loadNote(true);});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&state.page==='home'){loadCrewUpdates(true);loadNote(true);}});
+
+/* Permanent shared text. Title and body merge independently; overlap is always explicit. */
+const qBoard=document.querySelector('.daily-noteboard');
+qBoard.innerHTML='<header><div><span class="community-kicker">THE CREW NOTICEBOARD · EVERYBODY HAS THE PEN</span><label class="sr-only" for="notice-title">Noticeboard title</label><input id="notice-title" maxlength="100" value="The collective thought." aria-describedby="notice-help" disabled></div><span class="q-board-mark" aria-hidden="true">✎</span></header><label class="sr-only" for="daily-note">Shared noticeboard message</label><textarea id="daily-note" maxlength="12000" placeholder="An announcement, a terrible plan, or something worth keeping…" disabled></textarea><footer><span id="note-status" role="status">Opening the noticeboard…</span><small id="notice-help">Title & text autosave. This stays until you change it.</small></footer><div id="note-conflict" hidden><h3>Two pens crossed.</h3><p>Your draft is safe. The same text changed in two places. Edit your draft above, or choose below.</p><label for="note-remote-title">Shared title</label><input id="note-remote-title" readonly><label for="note-remote">Shared text</label><textarea id="note-remote" readonly></textarea><button type="button" data-q-board-merge>Combine both versions</button><button type="button" data-q-board-shared>Use shared version</button></div>';
+function boardInit(){note.titleBase??='';note.titleLocal??='';}
+const qNoteKey=()=> 'kme-permanent-note-'+(state.repo?.userId||'demo');
+noteDraft=function(){boardInit();storage.set(qNoteKey(),JSON.stringify({body:note.local,base:note.base,title:note.titleLocal,titleBase:note.titleBase,revision:note.revision}));};
+noteConflict=function(remote){note.conflict=remote;$('note-conflict').hidden=false;$('note-remote-title').value=remote.title||'';$('note-remote').value=remote.body||'';noteStatus('Edits overlap. Your draft is safe.');noteDraft();};
+noteApply=function(remote){boardInit();const body=KMECommunityCore.merge(note.base,note.local,remote.body),title=KMECommunityCore.merge(note.titleBase,note.titleLocal,remote.title);if(!body.ok||!title.ok){noteConflict(remote);return false;}note.base=remote.body;note.titleBase=remote.title;note.revision=remote.revision;note.local=body.text;note.titleLocal=title.text;note.dirty=note.local!==note.base||note.titleLocal!==note.titleBase;$('daily-note').value=note.local;$('notice-title').value=note.titleLocal;return true;};
+loadNote=async function(force=false){if(!state.repo||!state.world?.quality||note.loading||note.saving||document.hidden||state.page!=='home')return;if(!force&&Date.now()-note.last<12000)return;boardInit();const repo=state.repo,epoch=note.epoch;note.loading=true;note.last=Date.now();try{const r=chatResult(await repo.noticeLoad(note.ready?note.revision:null));if(repo!==state.repo||epoch!==note.epoch)return;if(!note.ready){note.day='permanent';note.base=note.local=r.body;note.titleBase=note.titleLocal=r.title;note.revision=r.revision;try{const draft=JSON.parse(storage.get(qNoteKey())||'null');if(draft){note.base=draft.base;note.local=draft.body;note.titleBase=draft.titleBase;note.titleLocal=draft.title;note.dirty=true;noteApply(r);}}catch{}$('daily-note').value=note.local;$('notice-title').value=note.titleLocal;}else if(!r.unchanged&&!noteApply(r))return;note.ready=true;$('daily-note').disabled=$('notice-title').disabled=!me();if(!note.conflict){noteStatus(note.dirty?'Your recovered draft is waiting to save.':'Saved · stays until the crew changes it');if(note.dirty)scheduleNote();}}catch(e){noteStatus(e.message+' Your local draft is kept.');}finally{if(epoch===note.epoch)note.loading=false;}};
+saveNote=async function(){boardInit();if(!note.ready||!note.dirty||note.conflict||note.saving||!me())return;const title=note.titleLocal.trim(),body=note.local,repo=state.repo,epoch=note.epoch;if(!title){noteStatus('Add a title to save. Your draft stays here.');noteDraft();return;}note.saving=true;noteStatus('Saving…');try{const r=await repo.noticeSave(state.selected,note.revision,title,body);if(repo!==state.repo||epoch!==note.epoch)return;if(r.conflict){noteApply(r.current);return;}chatResult(r);note.retryDelay=0;note.base=body;note.titleBase=title;note.revision=r.revision;note.dirty=note.local!==body||note.titleLocal.trim()!==title;if(!note.dirty){storage.remove(qNoteKey());noteStatus('Saved just now · title and text stay here');}else noteDraft();}catch(e){note.retryDelay=Math.min(60000,(note.retryDelay||2500)*2);noteDraft();noteStatus('Not saved yet. Your draft stays here; reconnect to retry.');}finally{if(epoch===note.epoch){note.saving=false;if(note.dirty&&!note.conflict){clearTimeout(noteTimer);noteTimer=setTimeout(saveNote,note.retryDelay||1100);}}}};
+function boardEdited(){boardInit();note.local=$('daily-note').value;note.titleLocal=$('notice-title').value;note.dirty=note.local!==note.base||note.titleLocal!==note.titleBase;noteDraft();noteStatus('Editing · saves automatically');scheduleNote();}
+$('daily-note').addEventListener('input',boardEdited);$('notice-title').addEventListener('input',boardEdited);
+document.addEventListener('click',e=>{const merge=e.target.closest('[data-q-board-merge]'),shared=e.target.closest('[data-q-board-shared]');if((!merge&&!shared)||!note.conflict)return;const r=note.conflict;if(shared){note.base=note.local=r.body;note.titleBase=note.titleLocal=r.title;note.revision=r.revision;note.dirty=false;storage.remove(qNoteKey());}else{const title=note.titleLocal.trim();note.local=r.body===note.local?r.body:r.body+'\n\n'+note.local;const both=r.title===title?r.title:r.title+' / '+title;if(both.length<=100)note.titleLocal=both;else{note.titleLocal=title;note.local+='\n\n[Other shared title: '+r.title+']';}note.base=r.body;note.titleBase=r.title;note.revision=r.revision;note.dirty=true;noteDraft();scheduleNote();}note.conflict=null;$('daily-note').value=note.local;$('notice-title').value=note.titleLocal;$('note-conflict').hidden=true;noteStatus(shared?'Showing the shared version.':'Combined draft waiting to save.');});
+
+
+let wardrobeState={profile:null,data:null,loading:false,slot:'ink',busy:false,last:0},qPaintQueued=false;
+function appearance(profile){return state.world?.appearances?.[profile?.id]||{};}
+function appearanceStyle(profile,slot){return qCatalog.get(appearance(profile)[slot])?.style||'default';}
+const Q_INKS={default:'#d2e8ac',ivory:'#f2e9d0',mint:'#88e3c2',lilac:'#cfb5f2',gold:'#efd486',coral:'#f0b5a0',sky:'#9dd3ef'};
+function qName(profile){return'<span data-cos-name="'+esc(profile.id)+'">'+esc(profile.name)+'</span>';}
+const qAvatarSvg=avatarSvg;avatarSvg=function(type,color){if(!['q-rat','q-mole','q-frog','q-ghost','q-wizard','q-plant'].includes(type))return qAvatarSvg(type,color);const common='<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">',eyes='<g fill="#18251e"><ellipse cx="24" cy="30" rx="3" ry="4"/><ellipse cx="41" cy="30" rx="3" ry="4"/></g>';let art='';if(type==='q-rat')art='<circle cx="16" cy="17" r="13" fill="#c69bb4"/><circle cx="48" cy="17" r="13" fill="#c69bb4"/><path d="M9 25Q32 5 55 25L47 48 32 58 17 48Z" fill="'+color+'"/>'+eyes+'<ellipse cx="32" cy="44" rx="6" ry="4" fill="#cd98a9"/><path d="M15 39 2 35M15 43 1 45M48 39 62 35M48 43 63 45" stroke="#e4ead2" stroke-width="2"/>';else if(type==='q-mole')art='<ellipse cx="32" cy="34" rx="27" ry="25" fill="'+color+'"/><path d="M9 24h19v14H9zm27 0h19v14H36z" fill="#233529" stroke="#dfcf8e" stroke-width="3"/><path d="M28 28h8" stroke="#dfcf8e" stroke-width="3"/><ellipse cx="32" cy="44" rx="10" ry="7" fill="#d2a3a4"/><path d="M12 55h40" stroke="#9a8159" stroke-width="5"/>';else if(type==='q-frog')art='<circle cx="18" cy="18" r="13" fill="'+color+'"/><circle cx="46" cy="18" r="13" fill="'+color+'"/><ellipse cx="32" cy="36" rx="28" ry="23" fill="'+color+'"/><g fill="#e6edcd"><circle cx="18" cy="17" r="7"/><circle cx="46" cy="17" r="7"/></g><g fill="#18251e"><circle cx="18" cy="17" r="3"/><circle cx="46" cy="17" r="3"/></g><path d="M17 38q15 15 30 0" fill="none" stroke="#263c2b" stroke-width="3"/>';else if(type==='q-ghost')art='<path d="M8 56V28a24 24 0 0 1 48 0v28L44 48 32 58 20 48Z" fill="'+color+'"/>'+eyes+'<ellipse cx="32" cy="43" rx="5" ry="7" fill="#243729"/>';else if(type==='q-wizard')art='<path d="M9 28 31 2 51 30Z" fill="#9186b3"/><path d="M7 28h50v8H7z" fill="#c0a0dc"/><path d="M13 34h38v21H13z" fill="'+color+'"/><g fill="#223325"><circle cx="24" cy="40" r="3"/><circle cx="41" cy="40" r="3"/></g><path d="m21 48 11 15 12-15" fill="#e7e6cd"/><path d="m30 10 2 4 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1" fill="#eddb93"/>';else art='<path d="M15 38h34l-5 22H20Z" fill="#b38d72"/><path d="M32 40V12" stroke="#a7d39d" stroke-width="5"/><path d="M31 29Q1 28 9 8q25-1 22 21m2-8q4-23 24-17 1 23-24 17" fill="'+color+'"/><g fill="#233d2a"><circle cx="26" cy="45" r="2"/><circle cx="39" cy="45" r="2"/></g><path d="M28 52q5 4 9 0" fill="none" stroke="#253b2c" stroke-width="2"/>';return common+art+'</svg>';};
+const qEventMarkup=eventMarkup;eventMarkup=function(event){const p=state.profiles.find(p=>p.id===event.profile_id),html=qEventMarkup(event);return p?html.replace('<strong>'+esc(p.name)+'</strong>','<strong>'+qName(p)+'</strong>'):html;};
+avatar=function(profile,size=''){const chosen=appearanceStyle(profile,'avatar'),ink=Q_INKS[appearanceStyle(profile,'ink')]||profile.color;return'<span class="avatar '+size+' q-avatar q-frame-'+appearanceStyle(profile,'frame')+' q-motion-'+appearanceStyle(profile,'motion')+'" data-cos-profile="'+esc(profile.id)+'" style="--av:'+esc(profile.color)+';--cos-ink:'+ink+'">'+avatarSvg(chosen==='default'?profile.avatar:'q-'+chosen,profile.color)+'</span>';};
+function paintIdentities(){qPaintQueued=false;const profiles=new Map(state.profiles.map(p=>[p.id,p]));for(const node of document.querySelectorAll('[data-cos-name]')){const p=profiles.get(node.dataset.cosName);if(!p)continue;node.classList.add('q-name');node.dataset.effect=appearanceStyle(p,'effect');node.style.setProperty('--name-ink',Q_INKS[appearanceStyle(p,'ink')]||Q_INKS.default);}
+ for(const av of document.querySelectorAll('[data-cos-profile]')){const p=profiles.get(av.dataset.cosProfile);if(!p)continue;const parent=av.closest('.post-head,.crew-roster-row,.squad-person,.character-card,.switch-button,.q-profile-banner');if(!parent)continue;const name=parent.querySelector('.post-author strong,.person-name,.crew-roster-name,.q-banner-name,h2,#side-name');if(name&&!name.querySelector('[data-cos-name]')){name.dataset.cosName=p.id;name.classList.add('q-name');name.dataset.effect=appearanceStyle(p,'effect');name.style.setProperty('--name-ink',Q_INKS[appearanceStyle(p,'ink')]||Q_INKS.default);}if(parent.matches('.crew-roster-row,.character-card'))parent.dataset.banner=appearanceStyle(p,'banner');}
+ for(const el of document.querySelectorAll('.scoreboard td,.boss-log strong,.community-event strong,#picker .character-card strong')){const p=state.profiles.find(p=>p.name===el.textContent);if(p){el.dataset.cosName=p.id;el.classList.add('q-name');el.dataset.effect=appearanceStyle(p,'effect');el.style.setProperty('--name-ink',Q_INKS[appearanceStyle(p,'ink')]||Q_INKS.default);}}
+}
+function queueIdentityPaint(){if(qPaintQueued)return;qPaintQueued=true;requestAnimationFrame(paintIdentities);}
+new MutationObserver(records=>{if(records.some(r=>!r.target.closest?.('#arena-game,#urge-mount,.timer,.mini-stat,[data-crew-timer],#hold-live-pill')))queueIdentityPaint();}).observe($('app'),{childList:true,subtree:true});
+async function loadWardrobe(force=false){const p=me();if(!p||!state.world?.quality)return;if(wardrobeState.loading){if(wardrobeState.profile!==p.id)wardrobeState.queued=true;return;}if(!force&&wardrobeState.profile===p.id&&Date.now()-wardrobeState.last<30000)return;const repo=state.repo;wardrobeState.loading=true;try{const data=chatResult(await repo.wardrobe(p.id));if(repo!==state.repo||state.selected!==p.id)return;wardrobeState.profile=p.id;wardrobeState.data=data;wardrobeState.last=Date.now();if($('wardrobe-dialog')?.open)renderWardrobe();}catch(e){if($('wardrobe-dialog')?.open)$('wardrobe-content').innerHTML='<p role="alert">'+esc(e.message)+'</p>';}finally{wardrobeState.loading=false;if(wardrobeState.queued){wardrobeState.queued=false;loadWardrobe(true);}}}
+function renderWardrobe(){const d=wardrobeState.data,p=me();if(!d||!p||wardrobeState.profile!==p.id)return;$('wardrobe-wallet').textContent=d.wallet.balance+' confetti';const slots=['ink','effect','avatar','motion','frame','banner'];$('wardrobe-tabs').innerHTML=slots.map(s=>'<button data-wardrobe-slot="'+s+'" aria-pressed="'+(wardrobeState.slot===s)+'">'+({ink:'Name colour',effect:'Name effect',avatar:'Character',motion:'Animation',frame:'Frame',banner:'Banner'}[s])+'</button>').join('');$('wardrobe-preview').dataset.banner=appearanceStyle(p,'banner');$('wardrobe-preview').innerHTML=avatar(p,'large')+'<div><strong>'+qName(p)+'</strong><span>A preview of your crew identity.</span></div>';$('wardrobe-content').innerHTML=d.catalog.filter(x=>x.slot===wardrobeState.slot).map(item=>{const owned=item.cost===0||d.owned.includes(item.id),equipped=(d.appearance[item.slot]||item.slot+'-default')===item.id;return'<article class="q-cosmetic-card" data-cosmetic="'+item.id+'"><div class="q-item-preview q-preview-'+item.slot+'" data-style="'+item.style+'">'+(item.slot==='avatar'?avatarSvg(item.style==='default'?p.avatar:'q-'+item.style,p.color):item.slot==='ink'?'<span style="color:'+(Q_INKS[item.style]||Q_INKS.default)+'">Aa</span>':item.slot==='banner'?'<span class="q-banner-sample" data-banner="'+item.style+'"></span>':item.slot==='motion'?'<span class="q-motion-'+item.style+'">'+avatarSvg(p.avatar,p.color)+'</span>':item.slot==='frame'?'<span class="q-frame-'+item.style+'">'+avatarSvg(p.avatar,p.color)+'</span>':'<span class="q-name" data-effect="'+item.style+'">Goblin</span>')+'</div><h3>'+esc(item.name)+'</h3><p>'+esc(item.description)+'</p><button data-cosmetic-equip="'+item.id+'" data-cosmetic-action="'+(owned?'equip':'unlock')+'" '+(wardrobeState.busy||equipped||!owned&&d.wallet.balance<item.cost?'disabled':'')+'>'+(equipped?'Equipped':owned?'Equip':item.cost+' confetti · unlock')+'</button></article>';}).join('');$('wardrobe-earning').innerHTML='<strong>Earn by doing things you already do.</strong><span>Share an original drawing: 20 · first each day ('+(d.today.art||0)+'/1)</span><span>Bank a played game: 10 · up to three each day ('+(d.today.game||0)+'/3)</span><span>Explicitly report resistance: 5 · first each day ('+(d.today.resisted||0)+'/1)</span><small>Caps apply per character and device in Helsinki calendar days. Starter balance: 20. Reporting nicotine use never earns confetti. All cosmetics are free, non-tradable and have no game power. Original capsule auras remain in Play → Records & loot.</small>';queueIdentityPaint();}
+async function openWardrobe(){if(!me()){picker();return;}let dialog=$('wardrobe-dialog');if(!dialog){dialog=document.createElement('dialog');dialog.id='wardrobe-dialog';dialog.className='q-dialog wardrobe-dialog';dialog.innerHTML='<header class="q-dialog-head"><div><span class="community-kicker">THE DEPARTMENT OF APPEARANCES</span><h2>Your wardrobe.</h2></div><button data-q-close aria-label="Close wardrobe">✕</button></header><div id="wardrobe-preview" class="q-identity-preview"></div><div class="q-wallet"><strong id="wardrobe-wallet">Opening…</strong><span>Cosmetic confetti. Zero resale value.</span></div><nav id="wardrobe-tabs" aria-label="Cosmetic category"></nav><p id="wardrobe-status" role="status"></p><div id="wardrobe-content"></div><details class="q-earnings"><summary>How to earn confetti</summary><div id="wardrobe-earning"></div></details>';document.body.append(dialog);}if(!dialog.open)dialog.showModal();$('wardrobe-content').innerHTML='<p>Opening the wardrobe…</p>';await loadWardrobe(true);renderWardrobe();}
+function openProfileCard(id){const p=state.profiles.find(p=>p.id===id);if(!p)return;let d=$('crew-profile-dialog');if(!d){d=document.createElement('dialog');d.id='crew-profile-dialog';d.className='q-dialog q-profile-dialog';document.body.append(d);}const mine=p.id===state.selected,stats=state.world?.main_scores?.find(s=>s.profile_id===id),events=state.events.filter(e=>e.profile_id===id),s=state.world?.extraction?.stats?.find?.(s=>s.profile_id===id),rankText=clockOn(p)?rankInfo(p).current.name:'Games-only crew';d.dataset.banner=appearanceStyle(p,'banner');d.innerHTML='<header class="q-dialog-head"><span class="community-kicker">CREW MEMBER / '+(mine?'YOUR CHARACTER':'THE SQUAD')+'</span><button data-q-close aria-label="Close character details">✕</button></header><div class="q-profile-identity">'+avatar(p,'large')+'<h2>'+qName(p)+'</h2><span class="tag">'+esc(rankText)+'</span><strong class="q-profile-time">'+(clockOn(p)?crewQuitTime(p):'Games & chat. No nicotine clock.')+'</strong></div><div class="q-profile-stats"><div><strong>'+Number(stats?.best_wave||0)+'</strong><span>BEST BLACKSITE WAVE</span></div><div><strong>'+Number(stats?.extractions||0)+'</strong><span>SAFE EXTRACTIONS</span></div><div><strong>'+Number(stats?.best_score||0)+'</strong><span>BEST BANKED HAUL</span></div></div>'+(clockOn(p)?'<section class="q-profile-reports"><h3>Recent shared check-ins</h3><p>'+events.filter(e=>e.kind==='resisted').length+' resisted · '+events.filter(e=>e.kind==='craving').length+' cravings · '+events.filter(e=>e.kind==='used').length+' use reports in the loaded history.</p></section>':'')+'<div class="q-profile-actions">'+(mine?'<button class="button" data-open-wardrobe>Customise your look ↗</button><button class="button secondary" data-action="edit">Edit your character</button>':'<button class="button secondary" data-q-switch="'+esc(id)+'">Choose this character ↗</button>')+'</div>';d.showModal();queueIdentityPaint();}
+document.addEventListener('click',async e=>{const b=e.target.closest('button');if(b?.hasAttribute('data-q-close'))b.closest('dialog').close();if(e.target.closest('[data-open-wardrobe]')){e.target.closest('dialog')?.close();openWardrobe();}if(b?.dataset.wardrobeSlot){wardrobeState.slot=b.dataset.wardrobeSlot;renderWardrobe();}if(b?.dataset.cosmeticEquip&&!wardrobeState.busy){wardrobeState.busy=true;const id=state.selected;renderWardrobe();try{const r=chatResult(await state.repo.cosmetic(id,b.dataset.cosmeticAction,b.dataset.cosmeticEquip));state.world.appearances??={};state.world.appearances[id]=r.appearance;await loadWardrobe(true);$('wardrobe-status').textContent='Look saved. The crew will see it across the app.';render();renderV4();}catch(err){$('wardrobe-status').textContent=err.message;}finally{wardrobeState.busy=false;renderWardrobe();}}if(b?.dataset.qProfile)openProfileCard(b.dataset.qProfile);if(b?.dataset.qSwitch){b.closest('dialog').close();picker();document.querySelector('#picker [data-character="'+CSS.escape(b.dataset.qSwitch)+'"]')?.click();}if(b?.matches('[data-action="edit"]'))b.closest('dialog')?.close();});
+
+let qSW=null,qInstallPrompt=null,qNotification={id:null,bound:null,prefs:{chat:true,checkins:false,timer:true,reminder:false,time:'19:00'},error:''},qReloading=false;
+const qIsIOS=()=>/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),qStandalone=()=>matchMedia('(display-mode:standalone)').matches||navigator.standalone===true;
+const qSWPromise=('serviceWorker'in navigator&&location.protocol!=='file:'?navigator.serviceWorker.register(new URL('./sw.js',location.href),{scope:'./'}).then(reg=>{qSW=reg;if(reg.waiting&&navigator.serviceWorker.controller)showUpdateReady(reg);reg.addEventListener('updatefound',()=>{const replacing=!!navigator.serviceWorker.controller;reg.installing?.addEventListener('statechange',()=>{if(replacing&&reg.waiting)showUpdateReady(reg);});});return reg;}).catch(e=>{qNotification.error='The app could not prepare offline/notification support. Refresh while connected.';return null;}):Promise.resolve(null));
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();qInstallPrompt=e;});
+if('serviceWorker'in navigator)navigator.serviceWorker.addEventListener('controllerchange',()=>{if(qReloading)location.reload();});
+function showUpdateReady(reg){if($('q-update-ready'))return;const box=document.createElement('div');box.id='q-update-ready';box.className='q-update-ready';box.innerHTML='<strong>A new KME version is ready.</strong><div>Save your drawing or finish your run, then update.</div><button type="button">Update when ready ↻</button>';box.querySelector('button').onclick=async()=>{if(arcadeHost.game||$('urge-dialog').open){showToast('Finish or save your current game/drawing before updating.');return;}if(note.dirty){await saveNote();if(note.dirty){showToast('Your noticeboard edit is still saving. Try once it is saved.');return;}}qReloading=true;reg.waiting?.postMessage({type:'SKIP_WAITING'});};document.body.append(box);}
+async function pushRpc(name,args={}){return chatResult(await liveRpc(state.repo,name,args));}
+async function pushEdge(action){const {data:{session}}=await state.repo.client.auth.getSession();if(!session)throw Error('Reopen the app to refresh your device session.');const r=await fetch(KME_CONFIG.supabaseUrl+'/functions/v1/kme-push',{method:'POST',headers:{apikey:KME_CONFIG.publishableKey,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({action})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.message||'Notification service is unavailable.');return d;}
+function notificationStatus(text){if($('notification-status'))$('notification-status').textContent=text;}
+function readNotificationPrefs(){return{chat:$('notify-chat').checked,checkins:$('notify-checkins').checked,timer:$('notify-timer').checked,reminder:$('notify-reminder').checked,time:$('notify-time').value||'19:00'};}
+async function openNotifications(){if(!me()){picker();return;}let d=$('notifications-dialog');if(!d){d=document.createElement('dialog');d.id='notifications-dialog';d.className='q-dialog';d.innerHTML='<header class="q-dialog-head"><div><span class="community-kicker">KME / ON YOUR HOME SCREEN</span><h2>Your pocket department.</h2></div><button data-q-close aria-label="Close app and notification settings">✕</button></header><div id="notification-install-help" class="q-install-help"></div><p class="q-notification-copy">Notifications are optional on this device. Lock-screen text is generic: it never includes nicotine outcomes, message text or drawings. Choose which kinds you want, and disable them any time.</p><div id="notification-binding" class="q-notification-copy"></div><div class="q-notification-grid"><label><input type="checkbox" id="notify-chat"><span><strong>Messages & drawings</strong><small>The crew has posted something. Frequent events are grouped.</small></span></label><label><input type="checkbox" id="notify-checkins"><span><strong>Shared crew check-ins</strong><small>Only a generic update. The outcome stays inside the app.</small></span></label><label><input type="checkbox" id="notify-timer"><span><strong>My coping timer</strong><small>A reminder after a three- or five-minute pause. Delivery may arrive a little late; nothing is logged for you.</small></span></label><label><input type="checkbox" id="notify-reminder"><span><strong>A daily nudge</strong><small>One reminder at your chosen Helsinki time.</small><input id="notify-time" type="time" value="19:00" aria-label="Daily reminder time in Helsinki"></span></label></div><p id="notification-status" class="q-notification-status" role="status"></p><div class="q-notification-actions"><button class="button" data-enable-notifications>Enable on this device</button><button class="button secondary" data-test-notifications>Send me a test</button><button class="button secondary" data-disable-notifications>Disable notifications</button><button class="button secondary" data-install-kme>Install KME ↗</button></div>';document.body.append(d);}if(!d.open)d.showModal();const help=$('notification-install-help');help.textContent=qIsIOS()&&!qStandalone()?'iPhone / iPad: in Safari, open Share → Add to Home Screen → Add. Open KME from that icon, then enable notifications here. Requires iOS/iPadOS 16.4 or later.':qStandalone()?'KME is running as your installed app. Choose your notification settings below.':'Add KME to your home screen from your browser’s menu, or use Install KME if your browser offers it.';notificationStatus('Checking this device…');
+ if(LIVE){try{const s=await pushRpc('kme_push_status');const reg=await qSWPromise,subscription=await reg?.pushManager.getSubscription(),endpointHash=subscription?Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(subscription.endpoint)))).map(n=>n.toString(16).padStart(2,'0')).join(''):null,own=subscription?s.devices.find(d=>d.endpoint_hash===endpointHash):null;qNotification.id=own?.id||null;qNotification.bound=own?.profile_id||null;qNotification.prefs=own?.prefs||qNotification.prefs;notificationStatus(subscription&&own?'Connected on this device. Change settings and save, or send a test.':qNotification.error||'Not enabled. Press Enable only if you want notifications.');}catch(e){notificationStatus(e.message);}}else notificationStatus('Demo: installation support can be previewed. Real notifications use your private live group only.');
+ for(const name of['chat','checkins','timer','reminder'])$('notify-'+name).checked=!!qNotification.prefs[name];$('notify-time').value=qNotification.prefs.time||'19:00';$('notification-binding').textContent=qNotification.bound?'Currently linked to '+(state.profiles.find(p=>p.id===qNotification.bound)?.name||'your character')+'. Saving links this device to '+me().name+'.':'Enable for '+me().name+' on this device.';document.querySelector('[data-enable-notifications]').textContent=qNotification.id?'Save settings for '+me().name:'Enable for '+me().name;
+ const available='Notification'in window&&'PushManager'in window&&'serviceWorker'in navigator&&(!qIsIOS()||qStandalone());document.querySelector('[data-enable-notifications]').disabled=!LIVE||!available;document.querySelector('[data-test-notifications]').disabled=!LIVE||!qNotification.id;document.querySelector('[data-disable-notifications]').disabled=!LIVE||!qNotification.id;if(!available&&LIVE)notificationStatus(qIsIOS()?'Install to the home screen and reopen from its icon to enable push.':'This browser does not support Web Push. Try a current supported browser.');
+}
+function vapidBytes(key){const raw=atob(key.replaceAll('-','+').replaceAll('_','/')+'='.repeat((4-key.length%4)%4));return Uint8Array.from(raw,c=>c.charCodeAt(0));}
+async function enableNotifications(button){if(!LIVE||!me())return;button.disabled=true;try{const permission=await Notification.requestPermission();if(permission!=='granted')throw Error('Notifications are not allowed. You can change this in your phone/browser settings.');notificationStatus('Connecting this device…');const reg=await qSWPromise;if(!reg)throw Error(qNotification.error||'App support is not ready. Refresh while connected.');await navigator.serviceWorker.ready;const config=await pushEdge('config'),sub=await reg.pushManager.getSubscription()||await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:vapidBytes(config.public_key)}),prefs=readNotificationPrefs();const r=await pushRpc('kme_push_register',{p_profile_id:state.selected,p_subscription:sub.toJSON(),p_prefs:prefs});qNotification={id:r.id,bound:state.selected,prefs,error:''};notificationStatus('Connected. Notifications follow the settings saved for this device.');await openNotifications();}catch(e){notificationStatus(e.message);}finally{button.disabled=false;}}
+async function disableNotifications(){let serverError='',localError='';try{if(LIVE)await pushRpc('kme_push_remove',{p_id:qNotification.id});}catch(e){serverError=e.message;}try{const reg=await qSWPromise,sub=await reg?.pushManager.getSubscription();if(sub)await sub.unsubscribe();}catch(e){localError=e.message;}qNotification.id=null;qNotification.bound=null;notificationStatus(localError?'Could not disable locally. Block notifications in your device settings, then retry.':serverError?'Blocked on this device. Server cleanup will retry when the session reconnects.':'Notifications disabled on this device.');if($('notifications-dialog')?.open&&!serverError&&!localError)await openNotifications();}
+document.addEventListener('click',async e=>{const b=e.target.closest('button');if(b?.hasAttribute('data-open-notifications'))openNotifications();if(b?.hasAttribute('data-enable-notifications'))enableNotifications(b);if(b?.hasAttribute('data-disable-notifications'))disableNotifications();if(b?.hasAttribute('data-test-notifications')){b.disabled=true;try{const r=await pushEdge('test');notificationStatus(r.sent?'A generic test was accepted by your push provider. Check this device’s notifications.':r.message||(r.failed?'The provider did not accept this test. Check your device permission and try again.':'The test was queued; delivery may be delayed.'));}catch(err){notificationStatus(err.message);}finally{b.disabled=false;}}if(b?.hasAttribute('data-install-kme')){if(qInstallPrompt){await qInstallPrompt.prompt();qInstallPrompt=null;}else notificationStatus(qIsIOS()?'Safari → Share → Add to Home Screen, then open KME from its icon.':'Use your browser menu → Install app / Add to Home screen.');}});
+const qSetHold=setHoldMinutes;setHoldMinutes=function(minutes){qSetHold(minutes);if(LIVE&&qNotification.id&&qNotification.bound===state.selected&&qNotification.prefs.timer)pushRpc('kme_push_timer',{p_until:new Date(Date.now()+minutes*60000).toISOString()}).catch(()=>{});};
+const qClearHold=clearHold;clearHold=function(){qClearHold();if(LIVE&&qNotification.id)pushRpc('kme_push_timer',{p_until:null}).catch(()=>{});};
+const qLock=lock;lock=async function(...args){if(LIVE&&state.repo?.client)await disableNotifications();qNotification.id=null;qNotification.bound=null;qNotification.restoredFor=null;wardrobeState={profile:null,data:null,loading:false,slot:'ink',busy:false,last:0};qUpdates.generation++;qUpdates.rows=[];await qLock(...args);$('notice-title').value='';};
+
+/* Restore an already opted-in device without ever requesting permission automatically. */
+async function restorePushState(){if(!LIVE||!me()||!state.repo?.userId||qNotification.restoredFor===state.repo.userId||qNotification.restoring||Date.now()<(qNotification.retryAt||0))return;const owner=state.repo.userId;if(!('Notification'in window)||Notification.permission!=='granted'||qIsIOS()&&!qStandalone()){qNotification.restoredFor=owner;return;}qNotification.restoring=true;try{const reg=await qSWPromise,sub=await reg?.pushManager.getSubscription();if(!sub){qNotification.restoredFor=owner;return;}const s=await pushRpc('kme_push_status'),digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(sub.endpoint)))).map(n=>n.toString(16).padStart(2,'0')).join(''),own=s.devices.find(d=>d.endpoint_hash===digest);if(owner!==state.repo?.userId)return;qNotification.id=own?.id||null;qNotification.bound=own?.profile_id||null;if(own)qNotification.prefs=own.prefs;qNotification.restoredFor=owner;}catch{qNotification.retryAt=Date.now()+60000;}finally{qNotification.restoring=false;}}
+
+/* Drafts are local and explicit: reconnecting never sends a message on your behalf. */
+let qDraftOwner='';
+function messageDraftKey(){return'kme-message-draft-'+(state.repo?.userId||'demo')+'-'+(state.selected||'none');}
+function restoreMessageDrafts(){const owner=(state.repo?.userId||'demo')+':'+state.selected;if(owner===qDraftOwner)return;qDraftOwner=owner;let draft='';try{draft=JSON.parse(storage.get(messageDraftKey())||'null')?.body||'';}catch{}for(const id of['home-chat-body','message-body'])$(id).value=draft;}
+function clearSentDraft(body){for(const id of['home-chat-body','message-body'])if($(id).value.trim()===String(body||'').trim())$(id).value='';try{const draft=JSON.parse(storage.get(messageDraftKey())||'null');if(draft?.body.trim()===String(body||'').trim())storage.remove(messageDraftKey());}catch{}}
+for(const id of['home-chat-body','message-body'])$(id).addEventListener('input',()=>{const body=$(id).value;storage.set(messageDraftKey(),JSON.stringify({body,saved_at:Date.now()}));for(const other of['home-chat-body','message-body'])if(other!==id&&document.activeElement!==$(other))$(other).value=body;});
+function outboxKey(repo){return'kme-send-receipts-'+(repo.userId||'demo');}
+function readOutbox(repo){try{return JSON.parse(storage.get(outboxKey(repo))||'[]');}catch{return[];}}
+const qReliableSocial=LiveRepository.prototype.social;LiveRepository.prototype.social=async function(action,profile,target=null,body=null){if(!['post','comment'].includes(action))return qReliableSocial.call(this,action,profile,target,body);const key=JSON.stringify([action,profile,target,body]),outbox=readOutbox(this),existing=outbox.find(r=>r.key===key),id=existing?.id||uid();this.qualitySends??=new Map();this.qualitySends.set(key,id);if(!existing){outbox.push({key,id});storage.set(outboxKey(this),JSON.stringify(outbox.slice(-10)));}const result=await qReliableSocial.call(this,action,profile,target,body);storage.set(outboxKey(this),JSON.stringify(readOutbox(this).filter(r=>r.key!==key)));if(action==='post')clearSentDraft(body);return result;};
+const qLocalSocial=DemoRepository.prototype.social;DemoRepository.prototype.social=async function(...args){const r=await qLocalSocial.apply(this,args);if(args[0]==='post')clearSentDraft(args[3]);return r;};
+for(const [formId,inputId,statusId]of[['home-chat-form','home-chat-body','home-chat-status'],['message-form','message-body','q-full-chat-status'],['comment-form','comment-body','q-comment-status']]){const form=$(formId);if(!form)continue;if(!$(statusId)){const status=document.createElement('p');status.id=statusId;status.className='v2-note';status.setAttribute('role','status');form.append(status);}form.addEventListener('submit',async e=>{e.preventDefault();e.stopImmediatePropagation();const input=$(inputId),body=input.value.trim(),profile=state.selected,parent=formId==='comment-form'?state.thread:null;if(!body||state.v2Busy||!profile)return;$(statusId).textContent='Sending…';const ok=await v2Mutation(()=>state.repo.social(parent?'comment':'post',profile,parent,body));if(ok){if(input.value.trim()===body)input.value='';if(!parent)clearSentDraft(body);$(statusId).textContent='Sent. The crew has been informed.';}else $(statusId).textContent='Not sent. Your draft is still here; try again.';},true);}
+
+/* One support-first Overview, one conversation room and one clear Play hub. */
+const Q_HEADLINES=[['Less nicotine.','More nonsense.'],['Keep the hands busy.','Let the kiosk wait.'],['One urge.','Zero purchase orders.'],['A little less nicotine.','A lot more goblin.'],['Clock in.','Leave the pouch out.'],['The crew is here.','The tin is optional.'],['No procurement today.','Management is sobbing.'],['Take a small pause.','Start a terrible drawing.'],['Same weird crew.','One better decision.'],['Your hands called.','They want a side quest.'],['Break the habit.','Keep the goblins.'],['Another minute here.','Another kiosk ignored.'],['Big Nicotine called.','We put it on hold.'],['Make something strange.','Skip buying something minty.'],['The urge can visit.','It does not get the keys.'],['Small steps count.','So do ridiculous drawings.'],['A good day to delay.','A great day for rats.'],['Welcome to your desk.','The goblin kept it warm.'],['Less autopilot.','More choosing for yourself.'],['Out of the tin.','Into the group chat.'],['A minute at a time.','A crew for the long run.'],['Your next break.','Your own terms.'],['Put down the purchase order.','Pick up a brush.'],['The department is open.','The kiosk can wait.']];
+const Q_GREETINGS=['Good to see you, {name}. Big Nicotine is having a bad day.','Welcome back, {name}. Your desk has been inspected by a rat.','Hey {name}. No perfect streak required to show up.','Clocking in, {name}? The goblin saved you a chair.','{name}, the crew is here. Do one small useful thing.','Morning, night or goblin overtime: glad you made it, {name}.','{name}, the next few minutes belong to you.','Welcome in, {name}. The meeting could have been a drawing.'];
+let qQuote=-1,qGreeting=0,qBannerStamp='',qChatView='messages',qDeepLinkUsed=false;
+function rotateGreeting(){let n=Math.floor(Math.random()*Q_HEADLINES.length),last=Number(storage.get('kme-last-heading'));if(n===qQuote||n===last)n=(n+1)%Q_HEADLINES.length;qQuote=n;qGreeting=Math.floor(Math.random()*Q_GREETINGS.length);storage.set('kme-last-heading',String(n));renderGreeting();}
+function renderGreeting(){if(qQuote<0)return;const h=document.querySelector('.community-heading h1');h.innerHTML=Q_HEADLINES[qQuote][0]+'<br><em>'+Q_HEADLINES[qQuote][1]+'</em>';$('greeting').innerHTML=Q_GREETINGS[qGreeting].replace('{name}',me()?qName(me()):'crew member');}
+function buildQualityLayout(){
+ const lounge=$('page-lounge'),activity=$('page-activity'),arena=$('page-arena'),bosses=$('page-bosses');
+ const roomHead=lounge.querySelector('.page-head');roomHead.innerHTML='<div><span class="community-kicker">THE COMMON ROOM</span><h1>Chat.</h1><p>Conversation on the right. Honest check-ins on the left. Same crew.</p></div><button class="button secondary" data-open-wardrobe>Your wardrobe ↗</button>';
+ const tabs=document.createElement('div');tabs.className='q-chat-tabs';tabs.innerHTML='<button data-chat-pane="messages" aria-pressed="true">Messages & drawings</button><button data-chat-pane="reports" aria-pressed="false">Nicotine check-ins</button>';roomHead.after(tabs);
+ const columns=document.createElement('div');columns.className='q-chat-columns';const reports=document.createElement('aside');reports.className='q-report-column';reports.innerHTML='<header><span class="community-kicker">INCIDENT REPORTS / SUPPORT LOG</span><h2>Check-ins.</h2><p>Shared by choice. There is no score for being perfect.</p></header>';for(const child of [...activity.children])if(!child.classList.contains('page-head'))reports.append(child);
+ const conversation=document.createElement('section');conversation.className='q-conversation-column';conversation.setAttribute('aria-label','Crew messages and drawings');for(const child of [...lounge.children])if(child!==roomHead&&child!==tabs)conversation.append(child);columns.append(reports,conversation);lounge.append(columns);
+ const oldHeading=arena.querySelector('.v4-room-heading');oldHeading.innerHTML='<div><span class="community-kicker">TAKE A BREAK / MAKE IT YOURS</span><h1>Play.</h1><p>Choose a game. Earn a look. Help the crew boss along the way.</p></div><button class="button secondary" data-open-wardrobe>Wardrobe & rewards ↗</button><div hidden><span id="v4-live-title"></span><span id="v4-relief-left"></span></div>';
+ const bossFold=document.createElement('details');bossFold.id='q-boss-fold';bossFold.className='q-boss-fold';bossFold.innerHTML='<summary><div><span class="community-kicker">CREW CAMPAIGN</span><strong id="q-boss-summary">The boss is still employed.</strong></div><span>Progress & finale ↗</span></summary><div class="q-boss-content"></div>';for(const child of [...bosses.children])if(!child.classList.contains('page-head'))bossFold.querySelector('.q-boss-content').append(child);oldHeading.after(bossFold);
+ arena.querySelector('.v4-urge-banner')?.remove();const gameMetrics=arena.querySelector('.v3-feature-strip');if(gameMetrics)gameMetrics.hidden=true;
+ const toolbar=arena.querySelector('.v3-actions');if(toolbar){for(const b of [...toolbar.children])if(b.dataset.v3==='arcade')b.remove();bossFold.querySelector('.q-boss-content').prepend(toolbar);}
+ const side=arena.querySelector('.v3-game-side');if(side){const records=document.createElement('details');records.className='q-secondary-fold';records.innerHTML='<summary>Your records & capsule loot</summary>';records.append(side);arena.querySelector('.v3-game-grid').after(records);}
+ const rival=arena.querySelector('.v3-game-grid .card.v3-panel');if(rival){const d=document.createElement('details');d.className='q-secondary-fold';d.innerHTML='<summary>Friendly challenges</summary>';d.append(rival);arena.append(d);}
+ for(const [id,label]of[['v6-library','Game library & separate leaderboards'],['v6-rotation-history','Rotating arcade history'],['v4-ballot','Vote for the next rotating game']]){const node=$(id);if(node){const d=document.createElement('details');d.className='q-secondary-fold';d.innerHTML='<summary>'+label+'</summary>';node.before(d);d.append(node);}}
+ for(const b of document.querySelectorAll('.sidebar [data-page],.mobile-nav [data-page]')){const page=b.dataset.page;if(page==='bosses'||page==='activity'){b.remove();continue;}if(page==='arena')b.innerHTML=b.innerHTML.replace('The arcade','Play').replace('Arcade','Play');if(page==='lounge')b.innerHTML=b.innerHTML.replace('Crew Chat','Chat');}
+ for(const nav of document.querySelectorAll('.sidebar nav,.mobile-nav')){const b=document.createElement('button');b.type='button';b.dataset.openWardrobe='';b.innerHTML='<span aria-hidden="true">✧</span> Wardrobe';nav.append(b);}
+ const head=$('home-chat-title');head.textContent='Crew updates.';document.querySelector('.home-chat-heading p').textContent='Messages, drawings and replies. Nothing lost in the paperwork.';document.querySelector('.home-chat-feed-label').innerHTML='<span id="home-update-label" role="status">RECENT MESSAGES & REPLIES</span><button type="button" data-q-refresh class="section-link">Refresh ↻</button>';
+ $('home-chat-feed').removeAttribute('tabindex');homeTimelineFilter='chat';
+}
+buildQualityLayout();
+function setChatPane(pane){qChatView=pane;$('page-lounge').dataset.chatPane=pane;document.querySelectorAll('[data-chat-pane]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.chatPane===pane)));}
+setChatPane('messages');
+function renderProfileBanner(){const p=me(),host=document.querySelector('.community-clockin');if(!host)return;const stamp=JSON.stringify([p?.id,p?.name,p?.avatar,p?.color,p?appearance(p):null,p?rank(p):'',state.world?.shifts?.find(s=>s.profile_id===p?.id)?.kind]);if(stamp===qBannerStamp)return;qBannerStamp=stamp;host.classList.add('q-profile-banner');host.dataset.banner=p?appearanceStyle(p,'banner'):'default';host.innerHTML='<div class="q-banner-person">'+(p?'<button class="q-avatar-button" data-q-profile="'+esc(p.id)+'" aria-label="View your character">'+avatar(p,'large')+'</button>':'')+'<div><span class="community-kicker">YOUR PROFILE / YOUR CREW</span><strong class="q-banner-name">'+(p?qName(p):'Choose your character')+'</strong><div class="q-banner-meta"><span class="q-banner-rank">'+esc(p?(clockOn(p)?rank(p):'GAMES-ONLY CREW'):'')+'</span><span id="current-shift">'+esc(p?(SHIFTS[state.world?.shifts?.find(s=>s.profile_id===p.id)?.kind]?.[1]||'Choose your shift'):'Clock in when ready')+'</span></div></div></div><div class="q-banner-buttons"><button data-v3="shift-picker">Clock in / shift ↗</button><button data-open-wardrobe>Customise ✧</button><button data-open-notifications>Install & notifications</button><button data-action="pick">Switch character ⇄</button></div>';queueIdentityPaint();}
+const qRoster=renderCrewRoster;renderCrewRoster=function(){qRoster();for(const row of $('squad-preview').querySelectorAll('.crew-roster-row')){const id=row.querySelector('[data-crew-timer]')?.dataset.crewTimer,p=state.profiles.find(p=>p.id===id);if(!p)continue;const name=row.querySelector('.person-name'),badge=name.querySelector('.crew-report-badge')?.outerHTML||'';name.innerHTML='<button class="q-name-button" data-q-profile="'+esc(id)+'">'+qName(p)+'</button>'+(id===state.selected?'<span class="crew-you">you</span>':'')+badge;const av=row.querySelector('.avatar'),button=document.createElement('button');button.className='q-avatar-button';button.dataset.qProfile=id;button.setAttribute('aria-label','View '+p.name);av.before(button);button.append(av);row.dataset.banner=appearanceStyle(p,'banner');}updateCrewRoster();queueIdentityPaint();};
+renderHome=function(){
+ if(note.repo!==state.repo){clearTimeout(noteTimer);note={repo:state.repo,day:null,base:'',local:'',revision:0,ready:false,dirty:false,saving:false,loading:false,conflict:null,last:0,epoch:note.epoch+1};$('daily-note').disabled=$('notice-title').disabled=true;homeFeedStamp='';}
+ renderCrewRoster();renderProfileBanner();renderGreeting();restoreMessageDrafts();
+ const posts=qUpdates.rows.slice(0,8),events=[...state.events].sort((a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at)).slice(0,6),stamp=JSON.stringify([posts.map(p=>[p.id,p.body,p.votes,p.comment_count,chatPictures.has(p.id)]),events.map(e=>[e.id,e.kind]),homeTimelineFilter,state.selected,qUpdates.ready,qUpdates.error]);
+ if(stamp!==homeFeedStamp){homeFeedStamp=stamp;pictureObserver.disconnect();const rows=[...(homeTimelineFilter==='checkins'?[]:posts.map(p=>({time:p.created_at,id:p.id,html:postMarkup(p)}))),...(homeTimelineFilter==='chat'?[]:events.map(e=>({time:e.created_at,id:e.id,html:homeEventMarkup(e)})))].sort((a,b)=>Date.parse(b.time)-Date.parse(a.time)||String(a.id).localeCompare(String(b.id)));$('home-chat-feed').innerHTML=(qUpdates.error?'<div class="q-feed-error" role="alert"><strong>Messages could not refresh.</strong><span>'+esc(qUpdates.error)+'</span><button type="button" data-q-refresh>Try again ↻</button></div>':'')+(rows.length?rows.map(r=>r.html).join(''):!qUpdates.ready?'<p class="q-loading" role="status">Loading the crew’s messages…</p>':'<div class="community-chat-empty"><span>✎</span><h3>'+(homeTimelineFilter==='checkins'?'No recent check-ins.':'The conversation starts here.')+'</h3><p>'+(homeTimelineFilter==='checkins'?'Sharing is optional. Your nicotine controls stay above.':'Send a message above or share a drawing. Replies appear here too.')+'</p></div>');$('home-update-label').textContent=homeTimelineFilter==='chat'?'RECENT MESSAGES, ART & REPLIES':homeTimelineFilter==='checkins'?'RECENT SHARED CHECK-INS':'THE CREW / ALL RECENT UPDATES';document.querySelectorAll('[data-home-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.homeFilter===homeTimelineFilter)));observeHomePictures();}
+ $('home-chat-send').disabled=state.v2Busy||!me()||!state.world?.quality;$('daily-note').disabled=$('notice-title').disabled=!note.ready||!me();if(state.page==='home'&&!document.hidden&&!$('app').hidden){loadCrewUpdates();loadNote();}
+ queueIdentityPaint();
+};
+const qNavigate=navigate;navigate=function(page){if(page==='activity'){page='lounge';setChatPane('reports');}else if(page==='lounge')setChatPane('messages');if(page==='bosses'){page='arena';$('q-boss-fold').open=true;}qNavigate(page);if(page==='home')rotateGreeting();};
+const qRender=renderV4;renderV4=function(){qRender();renderProfileBanner();queueIdentityPaint();restorePushState();const boss=state.world?.boss;if(boss)$('q-boss-summary').textContent=(boss.name||boss.title||'Crew boss')+' · '+(boss.status==='finale'?'final escape open':Math.max(0,Number(boss.max_hp||0)-Number(boss.damage||0))+' HP left');if(me()&&state.world?.quality&&(wardrobeState.profile!==state.selected||$('wardrobe-dialog')?.open&&Date.now()-wardrobeState.last>45000))loadWardrobe();if(!$('app').hidden&&!qDeepLinkUsed){qDeepLinkUsed=true;const route=new URL(location.href).searchParams.get('page');if(['home','lounge','arena','squad'].includes(route))queueMicrotask(()=>navigate(route));}};
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(b?.dataset.chatPane)setChatPane(b.dataset.chatPane);if(b?.hasAttribute('data-q-refresh'))loadCrewUpdates(true);if(b?.dataset.v4==='jump-vote'){$('v4-ballot').closest('details').open=true;}if(b?.dataset.v3==='finale'&&state.arcadeSlot==='studio'){arcadeHost.destroy();arenaProfile=null;state.arcadeSlot='rotating';}const av=e.target.closest('[data-cos-profile]');if(av&&!av.closest('button,dialog'))openProfileCard(av.dataset.cosProfile);},true);
+setInterval(()=>{if(!document.hidden&&state.page==='home'&&!$('app').hidden)rotateGreeting();},5*60000);
+rotateGreeting();

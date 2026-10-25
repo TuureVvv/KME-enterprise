@@ -1,3 +1,7 @@
+## Current integration: v2.9 quality of nicotine free life update
+
+Read AGENTS.md and RELEASE-PENDING.md first. Use work/v7/build.mjs and work/v7/package.mjs; the v6 scaffold alone removes the current quality integration. Details: work/v7/DEVELOPER.md (repository: src/quality/DEVELOPER.md). BLACKSITE remains permanent. Scheduled arcade builds stay unpublished until directly released by the human. Preserve the permanent noticeboard, shared wardrobe, Chat/Play routing and opt-in notifications.
+
 # KME arcade and BLACKSITE developer handoff
 
 **Release rule superseding all automatic deployment language below:** Read workspace AGENTS.md and RELEASE-PENDING.md first. Develop/test locally and mark accumulated work pending. Only a direct human publish/upload instruction or a new-version release announcement authorizes uploading all pending application work. A heartbeat or an agent-generated version does not authorize publishing, live migrations, pushes or activation. Scheduled winners remain local and pending; keep the existing side game active until the user releases them.
