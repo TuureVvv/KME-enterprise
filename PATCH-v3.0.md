@@ -1,0 +1,52 @@
+# v3.0 — GAMING WITHOUT NICOTINE
+
+**v3.0 release preparation. The user authorized publishing after the coherence/colour pass on 26 October 2026. Deployment evidence is recorded separately; preparation alone is not proof of deployment.**
+
+## Coherence and colour pass
+
+- A four-step expedition strip, pinned map destinations with distance, nearest-reward navigation and automatic removal of claimed targets. Navigation controls retain their DOM identity so moving HUD updates cannot swallow taps.
+- Actual before/after modification comparisons, grouped loadouts, persistent charge/release guidance, directional damage cues, critical/blocked/elemental feedback, individual sound presets for all weapons and optional touch vibration.
+- Neutral concrete/steel roads and warm interiors; eight building paint colours per district, with slate/copper, lavender/cobalt and charcoal/vermilion variations. Health and stamina use distinct rose/cyan colours. Green is an accent rather than a full-screen tint.
+- Static scenery, roofs and walls are batched separately, saving over 600 repeated draw calls while preserving indoor visibility and independent wall fades. Rebuild/disposal and effect budgets remain checked.
+- Explicit live repository support with authoritative compact progression, device-bound starts, idempotent settlement, private RLS tables, export/deletion and legacy-client compatibility. Paused heartbeat intervals grant no finale combat time. A disconnected expedition pauses with reconnect/retreat actions instead of immediately destroying the run.
+- All previous v3 weapons, modifications, bosses, shop/rarity icons and drawing fixes remain included. Demo data remains isolated from live characters.
+
+BLACKSITE now has a district expedition loop: select an operative, scavenge and defend the shelter, restore three signals, choose field upgrades, defeat the guardian and extract to secure a clear. Early evacuation is possible; clearing unlocks the next district. Staying for overtime remains optional and increasingly dangerous.
+
+## Current iteration — Armory, scavenging and shop redesign
+
+- **15 weapons and exactly 50 modifications.** Original charged red beam (Niko’s Final Warning), charged travelling ring (Compound Interest), returning saw, tracking dart bursts, proximity mines, rail lance, flame fan and three-round stapler join the seven existing weapons. Safe practice → Options → Inspect build lets you test every weapon. Charged weapons fire when you release; cancellation and pausing discard the charge.
+- A shared compiler combines pattern, trajectory, elemental payload and utility stats in a consistent order. All delivery shapes consume that payload; elemental reactions use status rules rather than a matrix of modifier pairs. Secondary effects have limits on depth, entities, leech and per-step impacts.
+- Clear districts or recover and extract blueprints to expand the weapon pool. Discovered weapon blueprints save only after a confirmed successful extraction. New records migrate existing local demo progress without resetting old clears. Weapons, installed mods, backpack, parts and scrap reset each run.
+- **Bongo’s Armory redesigned around Offers / Loadout / Workshop.** Persistent currency and exit, six rotating offers, readable prices and effect tags, exact “Buy & equip” / “Buy & install” actions, the receiving weapon, purchased states and useful insufficient-funds/prerequisite messages. Desktop 1366×768 shows all six purchase buttons without scrolling. Phones use large single-column cards, fixed section navigation and independently scrolling content. The shop is a focus-trapping modal so the app behind it cannot intercept controls.
+- Every purchase has an original vector pictogram: all 15 weapons, all 50 modifications and every workshop/shelter service. Common grey, uncommon green, rare blue and exotic purple colour the entire card surface and its banner, with a written rarity label. Loot reward cards use the same icons and rarity surfaces. Icons remain crisp at phone and desktop sizes.
+- Stock stays stable while browsing and rotates on assaults, restored signals and paid rerolls. Early assaults and rewards supply reroll vouchers. Loadout exposes free weapon switching and packed modifications; Workshop separates always-available repair/turret/vial services from a research bench (3 parts + 40 scrap → pick one of three rare mods).
+- Buildings contain distinct supply, research, armory, prototype and elite-vault rewards. Choose one reward, install it, pack it for another weapon or recycle it for research parts. Elite vaults require defeating Head of Approvals or the Repossession Rig.
+- Typed world loot: mod chips, blueprint sheets, guns, medical kits, parts, vouchers and scrap have different models, nearby labels and rarity colours. Dropped equipment stays for the run, has a diamond radar marker and appears by name/distance on the tactical map. Claimed loot disappears from the map. Medkits stay on the ground while health is full.
+- **Time to explore:** 90 seconds before the first automatic assault, 60-second clear windows, and optional early calls for vouchers. Scavenging time does not raise threat. After all signals are restored, the guardian waits for your explicit call; you can finish looting before the fight. Existing enemies remain dangerous during exploration.
+- Six new ordinary roles: shield-aura insurer, bomb-planting sapper, hammer breacher, corrosive spitter, pouncing red-tag skitter and reinforcing foreman. Two new optional bosses have stamp zones, fork charges, a winch and exposed recovery windows. Sapper bombs can be shot or parried to defuse.
+- Hostile rats now have red skin/eyes, spikes and danger markers; ambient workers wear beige/yellow hats and allied rats use green harnesses. New enemy silhouettes, visible health bars, beams/rings/mines/fields, vault labels and an industrial guardian terminal add combat readability.
+- A large white/lime mouse crosshair with a dark outline follows the actual aim point. Charge feedback is visible on the reticle and a dedicated bar. KME jokes stay in original names, descriptions and enemy announcements.
+
+The first local v3 demo source and verification record are preserved under `baseline/v3-demo1`. The current source is always `work/v8`.
+
+## Foundation retained from the first local demo
+
+- Four districts with different layouts, atmosphere, enemy pools and encounters: Mossline Yard, The Drowned Works, Violet Archives and Executive Blackout. Flooded routes slow movement outside bridges; later districts add marked environmental hazards, coil drones, surveyors and pursuit units.
+- Three initial operatives and one unlock: Unpaid Intern (emergency pulse and extra requisition choice), Union Enforcer (directional shield, timed blocks and empowered volleys), Rat Engineer (one temporary sentry with elemental inheritance and repositioning), and Liability Chemist (elemental flask and stronger shatter). These are loadouts within an existing demo character.
+- A large top-of-screen health/stamina display, numerical values, shelter alarm, gadget readiness, boss phase display, useful radar, objective markers, extraction channel and build inspection. Phone game mode opens automatically; portrait, landscape, simultaneous sticks, cancellation, handedness and touch aim assist are supported.
+- Weapon heat, venting and heat lockouts removed from the new simulation. The original weapon pool includes the Prism Carbine and Mortgage Launcher, now part of the expanded 15-weapon catalogue. Returning shots and the prototype-unlocked Firing Squad feature remain alongside elemental and orbital-rat combinations. Sounds follow actual shots, with original synthesized weapon layers.
+- Signal channels are interrupted by moving, firing or taking damage. Field requisitions offer run-changing upgrades. The optional alarmed cache calls a patrol and slows its carrier; returning the prototype and extracting secures the Firing Squad blueprint.
+- Guardians have readable states and punish windows. Mole emergence has a recovery window; Sludgemass turns slowly and takes extra damage from behind; Mr. Potency’s easy form returns as the real endgame guardian. The shield-charge single-impact rule is preserved.
+- An explicit overtime bargain adds an elite patrol, wave-5 pressure and an eight-second extraction channel in exchange for +35% eligible score within existing caps. Normal raids have no fifteen-minute limit.
+- New original procedural environments, isometric camera, indoor visibility, shadows on desktop, scalable effects, machinery, props, rain, projectile trails, impact effects and readable operative equipment. Performance mode, motion/shake, volume and mute settings are available.
+- Safe practice and contextual onboarding; shopping and options pause the local simulation. Result screens explain retention, clears and unlocks. Compact per-character demo progression, records and blueprints survive reload; result retries are idempotent. No unfinished combat world is saved.
+
+Drawing fix:
+
+- Brush opacity spans 0–100%, including exact 0.1% entry. Zero makes no marks. A stroke is composited once at its chosen opacity, avoiding dark joins from repeated segment overlap.
+- Add up to 12 full-resolution layers; reorder by dragging or buttons, rename, show/hide, adjust layer opacity, move layer artwork and delete. Structural changes and artwork movement support undo. Drafts preserve the full stack and migrate existing three-layer drawings. Delayed close events cannot destroy a reopened studio; opacity masks are composited once per input batch to keep pen/touch input practical. Original PNG output remains 2048×1536.
+
+The rest of the local app retains its existing noticeboard, messages, drawings, wardrobe, privacy, side arcade and explicit check-in behavior. The normal live application entry point and backend are unchanged. The v3 demo loads no Supabase client/config and blocks external connections; its session adapter refuses live repositories.
+
+Current limits: this is an ambitious browser game iteration, not a claim of AAA production values. Progress is local to the demo browser, with production/cross-device integration still to be designed and tested before any release. The remaining suggested classes are future work, not placeholders represented as playable content. Physical phone performance and sound still need hands-on review. No multiplayer combat or suspended-world save is implemented.

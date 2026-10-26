@@ -1,7 +1,8 @@
 {
   "current": {
-    "version": "2.9",
-    "name": "quality of nicotine free life update"
+    "version": "3.0",
+    "name": "GAMING WITHOUT NICOTINE",
+    "notes": "BLACKSITE district expeditions: 15 weapons, 50 composable modifications, rotating procurement, building/vault rewards, clear loot and navigation, original enemy/boss models, distinct district colours, readable HUD, no weapon heat, compact character progression and full Drawing Studio opacity/layers."
   },
   "history": [
     {
@@ -41,6 +42,11 @@
       "version": "2.9",
       "name": "quality of nicotine free life update",
       "notes": "Permanent editable noticeboard, reliable messages and replies, a shared cosmetic wardrobe, profile banners/cards, combined Chat and Play hubs, rotating greetings and opt-in installed-app notifications."
+    },
+    {
+      "version": "3.0",
+      "name": "GAMING WITHOUT NICOTINE",
+      "notes": "BLACKSITE district expeditions: 15 weapons, 50 composable modifications, rotating procurement, building/vault rewards, clear loot and navigation, original enemy/boss models, distinct district colours, readable HUD, no weapon heat, compact character progression and full Drawing Studio opacity/layers."
     }
   ]
 }

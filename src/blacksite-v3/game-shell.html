@@ -1,0 +1,47 @@
+<section class="blacksite bs-shelter bs30" aria-label="BLACKSITE district expeditions">
+  <header class="bs-head">
+    <div><small>KME / FIELD OPERATIONS · V3.0 / FIELD OPERATIONS</small><h2>BLACKSITE<span>GAMING WITHOUT NICOTINE</span></h2></div>
+    <div class="bs-header-actions"><button class="bs-settings" aria-label="Game options">Options</button><button class="bs-sound">Sound: off</button><button class="bs-pause" disabled>Pause</button><button class="bs-exit-mode" hidden>Exit ✕</button></div>
+  </header>
+  <div class="bs-stage">
+    <canvas class="bs-canvas" tabindex="0" aria-label="BLACKSITE: WASD move, mouse aim and fire, Space dash, R parry, Q class gadget, E interact, V vial, F weapon, X extract, Escape pause."></canvas>
+    <div class="bs-cursor" hidden><i></i></div><div class="bs-vignette"></div><div class="bs-damage-direction" hidden></div><div class="bs-combat-feedback" hidden></div><div class="bs-damage-flash"></div>
+    <div class="bs-hud" hidden>
+      <div class="bs-vitals">
+        <div class="bs-operative-tag"><span class="bs-class-tag"></span><span class="bs-time"></span></div>
+        <label><span>HEALTH</span><b class="bs-hp-num">100 / 100</b><meter class="bs-hp" min="0" max="100" value="100" aria-label="Player health"></meter></label>
+        <label class="bs-stamina-label"><span>STAMINA</span><b class="bs-stamina-num">100 / 100</b><meter class="bs-stamina" min="0" max="100" value="100" aria-label="Player stamina"></meter></label>
+        <div class="bs-base-label"><span>SHELTER</span><b></b><meter class="bs-base" min="0" max="1100" value="1100" aria-label="Shelter integrity"></meter></div>
+      </div>
+      <div class="bs-mission"><span class="bs-floor"></span><strong class="bs-objective"></strong><div class="bs-relay-status"></div><small class="bs-notice"></small><div class="bs-journey"></div><div class="bs-navigation"></div></div>
+      <button class="bs-map-button" aria-label="Open tactical map"><canvas class="bs-map" width="240" height="240" aria-label="District radar"></canvas><span>MAP / TAB</span></button>
+      <div class="bs-boss-panel" hidden><span>GUARDIAN <small class="bs-boss-phase"></small></span><strong class="bs-boss-name"></strong><meter class="bs-warden" min="0" max="100" value="100" aria-label="Boss health"></meter><small class="bs-boss-health"></small></div>
+      <div class="bs-base-alert" hidden><span>⚠ SHELTER UNDER ATTACK</span><b>Return or reinforce</b></div>
+      <div class="bs-waypoint" hidden></div>
+      <div class="bs-haul"></div><div class="bs-kit"></div><div class="bs-interact" hidden></div>
+      <div class="bs-loot-banner" hidden></div><div class="bs-charge" hidden><span>HOLD TO CHARGE</span><progress max="1" value="0"></progress></div><div class="bs-channel" hidden><span></span><progress max="5" value="0"></progress></div>
+      <div class="bs-readiness"><span class="bs-ready-dash"></span><span class="bs-ready-parry"></span><span class="bs-ready-gadget"></span></div>
+      <div class="bs-touch">
+        <div class="bs-joystick bs-move" role="group" aria-label="Movement joystick"><i></i><span>MOVE</span></div>
+        <div class="bs-touch-actions"><button class="bs-dash">DASH</button><button class="bs-parry">PARRY</button><button class="bs-use">INTERACT</button><button class="bs-gadget">GADGET</button><button class="bs-vial">VIAL</button><button class="bs-cycle">WEAPON</button></div>
+        <div class="bs-joystick bs-aim" role="group" aria-label="Aim and fire joystick"><i></i><span>AIM / FIRE</span></div>
+      </div>
+    </div>
+    <div class="bs-overlay"><span class="bs-tag">PREPARING FIELD OPERATIONS</span><h3>The company<br>needs a volunteer.</h3><p>Unfortunately, it chose you.</p></div>
+<dialog class="bs-shop bs-shop-redesign" hidden aria-label="Bongo's armory">
+ <header class="bs-shop-head"><div class="bs-shop-brand"><span>BONGO’S ARMORY</span><h3>Gear up.</h3></div><div class="bs-shop-wallet" aria-label="Run currency"></div><button class="bs-shop-close">Back to game <span>✕</span></button></header>
+ <div class="bs-shop-layout">
+  <aside class="bs-shop-sidebar"><nav class="bs-shop-nav" aria-label="Shop sections"></nav><p>BLUEPRINTS LAST.<br>GEAR IS FOR THIS RUN.<span>Extract alive to keep new weapon blueprints.</span></p></aside>
+  <main class="bs-shop-content"><div class="bs-shop-context"><h3 class="bs-shop-title"></h3><div class="bs-shop-feedback" role="status"></div></div><div class="bs-shop-current"></div>
+   <section class="bs-shop-panel-offers" aria-label="Rotating offers"><div class="bs-shop-tabs"></div><div class="bs-shop-items"></div></section>
+   <section class="bs-shop-panel-loadout" hidden aria-label="Owned gear"><div class="bs-weapon-rack"></div><div class="bs-shop-backpack"></div><div class="bs-installed-list"></div></section>
+   <section class="bs-shop-panel-workshop" hidden aria-label="Workshop"><div class="bs-shop-services"></div></section>
+  </main>
+ </div>
+</dialog>
+
+  </div>
+  <div class="bs-toolbar"><button class="bs-mode button secondary">⛶ Game mode</button><button class="bs-assault button secondary" hidden>Start assault / +voucher</button><button class="bs-build button secondary">Inspect build</button><button class="bs-overtime button secondary" hidden>Overtime contract</button><button class="bs-bank button" disabled>EVAC · opens at 1:00</button></div>
+  <div class="bs-status" role="status">District progression belongs to your selected character.</div>
+  <details class="bs-manual"><summary>Field manual · controls, classes and survival</summary><div><p><b>Move:</b> WASD/arrows or left stick. <b>Aim/fire:</b> mouse + hold click, or right stick. <b>Space:</b> dash. <b>R:</b> parry. <b>Q:</b> class gadget. <b>E:</b> contextual interaction. <b>V:</b> infusion. <b>F:</b> cycle owned weapons. <b>X:</b> extract. <b>Tab:</b> map. <b>Escape:</b> pause. Hold and RELEASE fire for charged beams, rings and rail shots. There is no weapon heat or venting.</p><p>You start with 90 seconds of quiet scavenging. Cleared assaults grant 60 seconds; start the next assault early for a shop voucher. Quiet time does not raise enemy difficulty. Restore three signals, choose field upgrades, finish looting, call and defeat the guardian and extract to unlock the next district. You can evacuate early after one minute, but that does not clear the district. Dash away from a locked eruption; parry shots back at their owners; attack Sludgemass from behind; punish Mr. Potency during reload.</p><p>Dropped equipment stays for the run and appears as a diamond on the map. Press E or INTERACT to read it, then install, pack or recycle. Buildings offer three rewards; elite vaults require defeating a guard. Loot decisions pause the action. Bongo stocks six rotating offers; parts buy research choices. The shelter is your tactical home. Turrets, repairs, cryo/Tesla equipment and reactive barricades use run scrap. Leaving it unattended is a decision. The alarmed purple cache holds a prototype: carry it home, then extract to keep the Firing Squad blueprint. It slows you slightly and calls an enemy patrol.</p><p>After the guardian dies, leave with the clear or accept an overtime contract: +35% eligible score within existing caps, an elite patrol, and a longer extraction channel. Ordinary overtime still gets harder. No normal-run time limit. Death or retreat retains 20% of eligible haul. Only confirmed successful extraction saves clears and blueprints.</p><p>These operatives are loadouts inside your existing character, not extra KME profiles. Practice is safe and earns nothing. Pausing keeps the expedition frozen while the tab stays open; there is no suspended combat-world save. Quitting an active expedition settles a retreat. Unconfirmed results can be retried without duplicate rewards.</p></div></details><div class="bs-loot"></div>
+</section>
