@@ -1,4 +1,12 @@
-# KILLME ENTERPRISE · v4.0
+# KILLME ENTERPRISE · v4.0.1
+
+**Archives guardian hotfix.** [Play](https://tuurevvv.github.io/KME-enterprise/?v=4.0.1-archives-hotfix-r1) · [Hotfix details](PATCH-v4.0.1.md)
+
+Fixed the repeatable freeze when summoning Head of Approvals after the Archives evidence mission. Guardians without a special HP override keep their valid, scaled catalogue health. All four real summon paths, the full Archives objective flow, phone rendering, and Mr. Potency’s two stages are checked.
+
+Mossline Yard is marked as the recommended full expedition; unlocked later starts are explicitly fresh-kit advanced shortcuts that skip earlier loot, rather than saved-run resumes. No database migration or collectible reset accompanies this patch. Current hotfix source: src/v401.
+
+## v4.0 main update
 
 **NO MORE AURA FOR U**
 

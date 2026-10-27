@@ -1,8 +1,8 @@
 {
   "current": {
-    "version": "4.0",
-    "name": "NO MORE AURA FOR U",
-    "notes": "A fresh 24-aura collection with exact odds, six hidden signatures and visual resonance; one stardust wallet; integrated My profile, ranks, stats and art; six weekly Singularity themes/achievements; continuous BLACKSITE circuits, distinct missions, calibration and uncapped competitive scores; brush smoothing and easier drawing likes."
+    "version": "4.0.1",
+    "name": "NO MORE AURA FOR U · Archives hotfix",
+    "notes": "Fixed the Archives guardian freeze caused by invalid boss health. Promoted guardians now keep their valid scaled health. Mossline Yard is marked as the recommended full expedition; later starts clearly explain their fresh-kit advanced-shortcut rules."
   },
   "history": [
     {
@@ -51,12 +51,17 @@
     {
       "version": "3.5",
       "name": "The Dark Side Of NICOTINE!",
-      "notes": "NIGHTFALL weekly team battles with fair roster targets and confirmed activity; collectible profile auras, duplicate stardust and deterministic crafting; an after-hours cosmic theme, readable surfaces and original game music with separate sound controls. All v3.0 BLACKSITE and Drawing Studio features retained."
+      "notes": "NICOTINE SINGULARITY weekly team battles with fair roster targets and confirmed activity; collectible profile auras, duplicate stardust and deterministic crafting; an after-hours cosmic theme, readable surfaces and original game music with separate sound controls. All v3.0 BLACKSITE and Drawing Studio features retained."
     },
     {
       "version": "4.0",
       "name": "NO MORE AURA FOR U",
       "notes": "A fresh 24-aura collection with exact odds, six hidden signatures and visual resonance; one stardust wallet; integrated My profile, ranks, stats and art; six weekly Singularity themes/achievements; continuous BLACKSITE circuits, distinct missions, calibration and uncapped competitive scores; brush smoothing and easier drawing likes."
+    },
+    {
+      "version": "4.0.1",
+      "name": "NO MORE AURA FOR U · Archives hotfix",
+      "notes": "Fixed the Archives guardian freeze caused by invalid boss health. Promoted guardians now keep their valid scaled health. Mossline Yard is marked as the recommended full expedition; later starts clearly explain their fresh-kit advanced-shortcut rules."
     }
   ]
 }

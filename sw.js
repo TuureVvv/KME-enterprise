@@ -1,4 +1,4 @@
-const VERSION='kme-v4.0.0-r1',BASE=new URL('./',self.location.href),SHELL=['./','./index.html','./app.js','./styles.css','./config.js','./vendor/supabase-2.118.0.js','./icons/icon-192.png','./icons/icon-512.png','./icons/badge-96.png','./offline.html'];
+const VERSION='kme-v4.0.1-r1',BASE=new URL('./',self.location.href),SHELL=['./','./index.html','./app.js','./styles.css','./config.js','./vendor/supabase-2.118.0.js','./icons/icon-192.png','./icons/icon-512.png','./icons/badge-96.png','./offline.html'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(VERSION).then(cache=>cache.addAll(SHELL.map(p=>new URL(p,BASE).href)))));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('kme-')&&key!==VERSION)await caches.delete(key);await self.clients.claim();})()));
 self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});
