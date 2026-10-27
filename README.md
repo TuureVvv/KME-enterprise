@@ -1,3 +1,24 @@
+# KILLME ENTERPRISE · v4.0
+
+**NO MORE AURA FOR U**
+
+[Play the current release](https://tuurevvv.github.io/KME-enterprise/?v=4.0.0-no-more-aura-for-u-r1) · [Full patch notes](PATCH-v4.0.md) · [Design and implementation plan](src/v40/DESIGN-IMPLEMENTATION-PLAN.md)
+
+BLACKSITE now continues through four distinct districts into harder circuits while keeping the whole build. New missions, district enemies, run-resource calibration, sector stardust and uncapped competitive records make every expedition count.
+
+My profile combines collection/style, rank emblems, records, achievements, best-loved art and Journey/activity. Collect 24 standard auras and six hidden signatures with exact normal rarity odds, small duplicate distill yields and visual resonance. Existing cosmetic balances merge into one stardust wallet. Collectible auras restart once; other character data remains.
+
+Nicotine Singularity rotates six weekly themes, awards contributing winners and supports optional stardust donations. Explicit consented reporting earns bounded team credit as described in the patch notes: Night Shift use/resistance, Quitters resistance, five qualifying check-ins per character/device/day. Nicotine quantity or strength never changes the credit.
+
+Drawing gains brush smoothing with exact zero/off and easier likes across chat surfaces. Phone controls, sound settings, reduced motion and original PNG recovery remain supported.
+
+112 isolated check groups passed, including 750 modifier compositions. Scores remain friend-group client reports; physical phones were not manually tested. [Implementation and validation](src/v40/README.md).
+
+![v4.0 patch notes](assets/patch-v4.0.png)
+
+<details>
+<summary>Historical release and development notes (superseded by v4.0)</summary>
+
 # KILLME ENTERPRISE · v2.9
 
 **quality of nicotine free life update**
@@ -47,3 +68,6 @@ Chat combines conversation and incident history with phone tabs. Play combines B
 The website is installable with an optional per-device Web Push subscription: generic crew updates, coping timers and an optional daily reminder. iOS16.4+ requires Home Screen installation; Android requires a compatible browser. Permission is requested only from an explicit button. Private push keys/endpoints and a bounded delivery queue stay on the server. Physical phone delivery must be checked using the built-in test after installation.
 
 Current development build: `node work/v7/build.mjs --pending`, then `node work/v7/package.mjs --pending`. Read src/quality/DEVELOPER.md before changing this layer. Never rebuild with v6 alone.
+
+</details>
+

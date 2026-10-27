@@ -1,0 +1,4 @@
+import fs from'node:fs/promises';import'./core.js';
+const V=globalThis.KMEV4,quote=v=>v===null?'null':typeof v==='number'?String(v):typeof v==='boolean'?String(v):"'"+String(v).replaceAll("'","''")+"'";
+const values=V.all.map(a=>'('+[a.id,a.tier,a.name,a.variant,a.hidden,a.cost,a.yield,a.hidden?V.themes.find(t=>t.signature.id===a.id).index:null].map(quote).join(',')+')').join(',\n');
+export const migration=await fs.readFile(new URL('schema.sql',import.meta.url),'utf8')+'\ninsert into kme_private.v4_aura_catalog(id,tier,name,variant,hidden,cost,distill,theme)values\n'+values+'\non conflict(id)do update set name=excluded.name,cost=excluded.cost,distill=excluded.distill;\n'+await fs.readFile(new URL('community-api.sql',import.meta.url),'utf8')+'\n'+await fs.readFile(new URL('economy-api.sql',import.meta.url),'utf8')+'\n'+await fs.readFile(new URL('game-api.sql',import.meta.url),'utf8');

@@ -1,0 +1,1 @@
+import fs from'node:fs/promises';import{execFileSync}from'node:child_process';execFileSync(process.execPath,['work/v8/package.mjs'],{stdio:'inherit'});await fs.copyFile('outputs/kme-v3-demo.html','outputs/kme-v4-demo.html');await fs.copyFile('outputs/site/v3-standalone.html','outputs/site/v4-standalone.html');console.log('Prepared current v4 standalone demo. No network writes.');

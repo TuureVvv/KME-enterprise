@@ -1,0 +1,49 @@
+alter table kme_private.nightfall_damage drop constraint if exists nightfall_damage_category_check;
+alter table kme_private.nightfall_damage add constraint nightfall_damage_category_check check(category in('game','art','resisted','rally','popular','report','donation'));
+create or replace function kme_private.nightfall_award(p_profile uuid,p_user uuid,p_category text,p_receipt text)returns integer language plpgsql security definer set search_path='' as $$
+declare today date:=(now()at time zone'Europe/Helsinki')::date;w date:=date_trunc('week',now()at time zone'Europe/Helsinki')::date;m kme_private.nightfall_members%rowtype;cap integer;points integer;used_profile integer;used_device integer;days integer;
+begin
+ if p_user is null or not exists(select 1 from public.kme_profiles where id=p_profile)then return 0;end if;perform pg_advisory_xact_lock(hashtextextended('nightfall-awards-v35',0));
+ select * into m from kme_private.nightfall_members where week=w and profile_id=p_profile and left_at is null;if not found or exists(select 1 from kme_private.nightfall_damage where receipt=p_receipt)then return 0;end if;
+ cap:=case p_category when'game'then 3 when'art'then 1 when'rally'then 1 when'popular'then 1 when'report'then 5 when'donation'then 10 else 0 end;points:=case p_category when'game'then 10 when'art'then 10 when'rally'then 5 when'popular'then 10 when'report'then 2 when'donation'then 1 else 0 end;
+ if cap=0 or(select count(*)from kme_private.nightfall_damage where profile_id=p_profile and day=today and category=p_category)>=cap or(select count(*)from kme_private.nightfall_damage where user_id=p_user and day=today and category=p_category)>=cap then return 0;end if;
+ if p_category='game'then select count(distinct day)into days from kme_private.nightfall_damage where profile_id=p_profile and week=w and day<today;points:=floor(10*least(1.35,1+.05*days));end if;
+ select coalesce(sum(amount),0)into used_profile from kme_private.nightfall_damage where profile_id=p_profile and day=today;select coalesce(sum(amount),0)into used_device from kme_private.nightfall_damage where user_id=p_user and day=today;
+ points:=greatest(0,least(points,60-used_profile,60-used_device));if points=0 then return 0;end if;insert into kme_private.nightfall_damage(receipt,week,day,profile_id,user_id,team,category,amount)values(p_receipt,w,today,p_profile,p_user,m.team,p_category,points);return points;
+end;$$;
+create or replace function kme_private.nightfall_earning()returns trigger language plpgsql security definer set search_path='' as $$begin if new.category in('game','art')then perform kme_private.nightfall_award(new.profile_id,new.user_id,new.category,'earned:'||new.receipt);end if;return new;end;$$;
+create or replace function kme_private.v4_reporting_credit()returns trigger language plpgsql security definer set search_path='' as $$declare faction text;begin
+ if new.kind not in('used','resisted')or not exists(select 1 from public.kme_profiles where id=new.profile_id and tracking_enabled)or not exists(select 1 from kme_private.device_preferences where user_id=new.created_by and allow_nicotine)then return new;end if;
+ select team into faction from kme_private.nightfall_members where week=date_trunc('week',now()at time zone'Europe/Helsinki')::date and profile_id=new.profile_id and left_at is null;
+ if new.kind='resisted'and faction in('rehab','night')or new.kind='used'and faction='night'then perform kme_private.nightfall_award(new.profile_id,new.created_by,'report','checkin:'||new.id);end if;return new;
+end;$$;
+create or replace trigger v4_reporting_credit after insert on public.kme_activity for each row execute function kme_private.v4_reporting_credit();
+
+create or replace function kme_private.v4_finalize_weeks()returns void language plpgsql security definer set search_path='' as $$
+declare w date;current_week date:=date_trunc('week',now()at time zone'Europe/Helsinki')::date;a numeric;b numeric;atarget numeric;btarget numeric;winner text;scores jsonb;
+begin
+ perform pg_advisory_xact_lock(hashtextextended('nightfall-awards-v35',0));
+ for w in select distinct m.week from kme_private.nightfall_members m where m.week<current_week and not exists(select 1 from kme_private.v4_week_results r where r.week=m.week)order by m.week limit 104 loop
+  select coalesce(sum(amount)filter(where team='rehab'),0),coalesce(sum(amount)filter(where team='night'),0)into a,b from kme_private.nightfall_damage where week=w;select coalesce(sum(target)filter(where team='rehab'),0),coalesce(sum(target)filter(where team='night'),0)into atarget,btarget from kme_private.nightfall_members where week=w;
+  winner:=case when atarget=0 or btarget=0 or a+b=0 then null when a*btarget=b*atarget then'tie'when a*btarget>b*atarget then'rehab'else'night'end;
+  scores:=kme_private.nightfall_snapshot(null,w)->'teams';insert into kme_private.v4_week_results(week,theme,winner,scores)values(w,kme_private.v4_theme(w),winner,scores)on conflict do nothing;
+  if winner is not null then insert into kme_private.v4_achievements(profile_id,week,team,kind,theme)select m.profile_id,w,m.team,case when winner='tie'then'shared-orbit'else'victory'end,kme_private.v4_theme(w)from kme_private.nightfall_members m where m.week=w and(winner='tie'or m.team=winner)and exists(select 1 from kme_private.nightfall_damage d where d.week=w and d.profile_id=m.profile_id and d.amount>0)on conflict do nothing;end if;
+ end loop;
+end;$$;
+do $$begin if to_regprocedure('kme_private.nightfall_v35(uuid,text,text)')is null then alter function public.kme_nightfall(uuid,text,text)rename to nightfall_v35;alter function public.nightfall_v35(uuid,text,text)set schema kme_private;end if;end;$$;
+create or replace function public.kme_nightfall(p_profile_id uuid,p_action text default'read',p_team text default null)returns jsonb language plpgsql security definer set search_path='' as $$declare v jsonb;begin
+ perform kme_private.guard(p_profile_id,'singularity',60,60);perform kme_private.v4_finalize_weeks();v:=kme_private.nightfall_v35(p_profile_id,p_action,p_team);return v||jsonb_build_object('event_name','Nicotine Singularity','theme',kme_private.v4_theme((v->>'week')::date),'report_limit',5,'history',(select coalesce(jsonb_agg(to_jsonb(r)order by r.week desc),'[]')from(select * from kme_private.v4_week_results order by week desc limit 6)r));
+end;$$;
+
+create or replace function public.kme_profile_v4(p_profile_id uuid,p_before timestamptz default null)returns jsonb language plpgsql security definer set search_path='' as $$
+declare health boolean;v jsonb;timeline jsonb;best jsonb;
+begin
+ perform kme_private.guard(p_profile_id,'profile-v4',60,60);perform kme_private.v4_finalize_weeks();health:=exists(select 1 from public.kme_profiles where id=p_profile_id and tracking_enabled)and exists(select 1 from kme_private.device_preferences where user_id=auth.uid()and allow_nicotine);
+ select coalesce(jsonb_agg(x.data order by x.at desc,x.id desc),'[]')into timeline from(select * from(
+  select r.id::text id,r.finished_at at,jsonb_build_object('id',r.id,'kind','game','at',r.finished_at,'title',case when r.game_key='blacksite'then'BLACKSITE expedition'else'Arcade extraction'end,'score',coalesce(r.result->'score','0'),'outcome',r.result->'blacksite'->>'outcome')data from kme_private.extraction_runs r where r.profile_id=p_profile_id and r.result is not null and r.finished_at is not null
+  union all select p.id::text,p.created_at,jsonb_build_object('id',p.id,'kind',case when a.post_id is not null then'art'else'chat'end,'at',p.created_at,'title',p.body,'votes',(select count(*)from kme_private.votes where post_id=p.id))from kme_private.posts p left join kme_private.chat_art a on a.post_id=p.id where p.profile_id=p_profile_id and p.deleted_at is null
+  union all select e.id::text,e.created_at,jsonb_build_object('id',e.id,'kind','checkin','at',e.created_at,'title',e.kind)from public.kme_activity e where health and e.profile_id=p_profile_id
+ )items where(p_before is null or at<p_before)order by at desc,id desc limit 30)x;
+ select jsonb_build_object('id',p.id,'body',p.body,'created_at',p.created_at,'votes',(select count(*)from kme_private.votes where post_id=p.id),'full_art',true,'drawing',true,'width',a.width,'height',a.height,'profile_id',p.profile_id,'own_device',p.user_id=auth.uid(),'voted_by_me',exists(select 1 from kme_private.votes where post_id=p.id and user_id=auth.uid()))into best from kme_private.posts p join kme_private.chat_art a on a.post_id=p.id where p.profile_id=p_profile_id and p.deleted_at is null order by(select count(*)from kme_private.votes where post_id=p.id)desc,p.created_at desc limit 1;
+ v:=jsonb_build_object('ok',true,'healthVisible',health,'collection',kme_private.v4_collection(p_profile_id),'records',coalesce((select to_jsonb(c)-'profile_id'from kme_private.v4_competitive c where profile_id=p_profile_id),'{}'),'legacy',(select to_jsonb(s)-'profile_id'from kme_private.blacksite_stats s where profile_id=p_profile_id),'progress',(select data from kme_private.blacksite_progress where profile_id=p_profile_id),'capsules',coalesce((select capsules from kme_private.extraction_stats where profile_id=p_profile_id),0),'retained',jsonb_build_object('drawings',(select count(*)from kme_private.chat_art a join kme_private.posts p on p.id=a.post_id where p.profile_id=p_profile_id and p.deleted_at is null),'respect',(select count(*)from kme_private.votes v join kme_private.posts p on p.id=v.post_id where p.profile_id=p_profile_id and p.deleted_at is null)),'timeline',timeline,'bestArt',best,'faction',(select team from kme_private.nightfall_members where week=date_trunc('week',now()at time zone'Europe/Helsinki')::date and profile_id=p_profile_id and left_at is null),'achievements',(select coalesce(jsonb_agg(to_jsonb(a)-'profile_id'-'team'order by week desc),'[]')from kme_private.v4_achievements a where profile_id=p_profile_id));return v;
+end;$$;
