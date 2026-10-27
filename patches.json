@@ -1,8 +1,8 @@
 {
   "current": {
-    "version": "3.0",
-    "name": "GAMING WITHOUT NICOTINE",
-    "notes": "BLACKSITE district expeditions: 15 weapons, 50 composable modifications, rotating procurement, building/vault rewards, clear loot and navigation, original enemy/boss models, distinct district colours, readable HUD, no weapon heat, compact character progression and full Drawing Studio opacity/layers."
+    "version": "3.5",
+    "name": "The Dark Side Of NICOTINE!",
+    "notes": "NIGHTFALL weekly team battles with fair roster targets and confirmed activity; collectible profile auras, duplicate stardust and deterministic crafting; an after-hours cosmic theme, readable surfaces and original game music with separate sound controls. All v3.0 BLACKSITE and Drawing Studio features retained."
   },
   "history": [
     {
@@ -46,7 +46,12 @@
     {
       "version": "3.0",
       "name": "GAMING WITHOUT NICOTINE",
-      "notes": "BLACKSITE district expeditions: 15 weapons, 50 composable modifications, rotating procurement, building/vault rewards, clear loot and navigation, original enemy/boss models, distinct district colours, readable HUD, no weapon heat, compact character progression and full Drawing Studio opacity/layers."
+      "notes": "LOCAL DEMO: district expeditions, operatives and gadgets, readable combat HUD, no gun overheating, field requisitions, original environments, compact progression and improved drawing layers/opacity."
+    },
+    {
+      "version": "3.5",
+      "name": "The Dark Side Of NICOTINE!",
+      "notes": "NIGHTFALL weekly team battles with fair roster targets and confirmed activity; collectible profile auras, duplicate stardust and deterministic crafting; an after-hours cosmic theme, readable surfaces and original game music with separate sound controls. All v3.0 BLACKSITE and Drawing Studio features retained."
     }
   ]
 }
