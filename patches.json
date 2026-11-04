@@ -1,8 +1,8 @@
 {
   "current": {
-    "version": "4.0.1",
-    "name": "NO MORE AURA FOR U · Archives hotfix",
-    "notes": "Fixed the Archives guardian freeze caused by invalid boss health. Promoted guardians now keep their valid scaled health. Mossline Yard is marked as the recommended full expedition; later starts clearly explain their fresh-kit advanced-shortcut rules."
+    "version": "6.0",
+    "name": "AFTER HOURS: HOSTILE TAKEOVER",
+    "notes": "The company becomes a living headquarters: six-floor cooperative operations, an original office world and crew gazette, The Exhibition, Quiet Room, Private Logbook, The Night Desk daily routing puzzle, personal palettes and room directory. Includes the complete v5 BLACKSITE expedition, infrastructure, bosses, looting and build improvements, plus separate text/art allowances and persistent image caching. Existing characters, records, collections and art are retained."
   },
   "history": [
     {
@@ -62,6 +62,16 @@
       "version": "4.0.1",
       "name": "NO MORE AURA FOR U · Archives hotfix",
       "notes": "Fixed the Archives guardian freeze caused by invalid boss health. Promoted guardians now keep their valid scaled health. Mossline Yard is marked as the recommended full expedition; later starts clearly explain their fresh-kit advanced-shortcut rules."
+    },
+    {
+      "version": "5.0",
+      "name": "THE COMPANY OWNS YOU",
+      "notes": "Expedition briefings and headquarters, optional district infrastructure and sealed annex rewards, readable build identities and comparisons, deliberate scavenging, two original vault bosses, adjustable touch controls and the reliability foundation for the next release."
+    },
+    {
+      "version": "6.0",
+      "name": "AFTER HOURS: HOSTILE TAKEOVER",
+      "notes": "The company becomes a living headquarters: six-floor cooperative operations, an original office world and crew gazette, The Exhibition, Quiet Room, Private Logbook, The Night Desk daily routing puzzle, personal palettes and room directory. Includes the complete v5 BLACKSITE expedition, infrastructure, bosses, looting and build improvements, plus separate text/art allowances and persistent image caching. Existing characters, records, collections and art are retained."
     }
   ]
 }
