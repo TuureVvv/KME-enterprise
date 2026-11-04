@@ -2,7 +2,7 @@
 
 Authoritative machine-readable results: `outputs/V6-LOCAL-VERIFICATION.json`, individual `V6-*-VERIFICATION.json` files and `V6-RUNTIME-LOG.json`. Final runtime fingerprints are captured only after affected UI checks pass.
 
-The cumulative release has **112 isolated check groups**, including **750 modifier compositions**, **200 solvable deterministic routing-puzzle seeds**, all ten supported boss kinds and actual four-district guardian summons. The complete Archives evidence/delivery/call/combat/defeat/transit regression remains.
+The cumulative release has **113 isolated check groups**, including **750 modifier compositions**, **200 solvable deterministic routing-puzzle seeds**, all ten supported boss kinds and actual four-district guardian summons. The complete Archives evidence/delivery/call/combat/defeat/transit regression remains.
 
 New UI flows cover room navigation, keyboard search, games-only support gating, private note drafts/edit/export/character separation, optional support without health reports, a daily puzzle solved through actual controls, proof-based cooperative progress and lost-response receipt retry, real local original artwork/favourites/download, the fifty-mod training lab, and all destinations at 390×844, 320×740 and 844×390. A final targeted pass follows the last accessibility/presentation adjustment.
 
